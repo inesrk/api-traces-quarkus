@@ -1,0 +1,32 @@
+language: java
+
+jdk:
+  - openjdk11
+
+services:
+  - docker
+
+cache:
+  directories:
+  - .autoconf
+  - $HOME/.m2
+
+sudo: required
+
+before_install:
+  - echo "MAVEN_OPTS='-Xmx2048M -Xss128M -XX:+CMSClassUnloadingEnabled -XX:+UseG1GC -XX:-UseGCOverheadLimit'" > ~/.mavenrc
+
+install: skip
+
+before_script:
+  - cp .travis.settings.xml $HOME/.m2/settings.xml
+
+script: mvn install
+
+after_success:
+  - mvn help:evaluate -N -Dexpression=project.version|grep -v '\['
+  - export project_version=$(mvn help:evaluate -N -Dexpression=project.version|grep -v '\['
+  - mvn deploy
+
+notifications:
+  slack: enterpriseflo-sdf9244:I2PkD1iUs0lMR3Zon4ciy5zS
