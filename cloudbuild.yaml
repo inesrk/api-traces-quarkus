@@ -1,0 +1,32 @@
+steps:
+  # Clone Git local
+#  - name: gcr.io/cloud-builders/git
+#    args: ["fetch", "--unshallow"]
+
+  # Maven compile
+  - name: 'gcr.io/cloud-builders/mvn'
+    args: ['install']
+
+  # Create image Docker
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["build", "-t", "eu.gcr.io/$PROJECT_ID/api-traces-quarkus", "--file", "Dockerfile.native", "."]
+    dir: src/main/docker
+
+  # Push into Docker Repository
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "eu.gcr.io/$PROJECT_ID/api-traces-quarkus"]
+
+  # Deploy K8S configuration
+  - name: "gcr.io/cloud-builders/kubectl"
+    args:
+      - apply
+      - -f
+      - src/main/k8s/
+      - --record
+    env:
+      - "CLOUDSDK_COMPUTE_REGION=$_REGION"
+      - "CLOUDSDK_CONTAINER_CLUSTER=$_CLUSTER_NAME"
+
+timeout: 660s
+tags: ['api-traces-quarkus']
+images: ["eu.gcr.io/$PROJECT_ID/api-traces-quarkus"]
