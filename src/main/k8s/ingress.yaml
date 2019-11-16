@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: api-traces-quarkus
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  labels:
+    app: api-traces-quarkus
+spec:
+  rules:
+  - http: 
+      paths:
+      - path: /traces/1/*
+        backend:
+          serviceName: api-traces-quarkus
+          servicePort: 8083
