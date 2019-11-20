@@ -28,6 +28,13 @@ public interface TraceResource {
       @QueryParam("keys") List<String> keys);
 
   /**
+   * Bulk usage for put some traces.
+   */
+  @PUT
+  @Consumes("application/json")
+  void bulkTraces(List<Trace> data);
+
+  /**
    * Creates a new instance of a `Trace`.
    */
   @POST

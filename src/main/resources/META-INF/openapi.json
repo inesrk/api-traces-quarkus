@@ -78,6 +78,35 @@
                 "summary": "List All traces",
                 "description": "Gets a list of all `Trace` entities."
             },
+            "put": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Trace"
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "trace"
+                ],
+                "responses": {
+                    "202": {
+                        "description": "Traces validated, accepted but inserted yet.\nAsynchronous insertion."
+                    },
+                    "500": {
+                        "$ref": "#/components/responses/Error"
+                    }
+                },
+                "operationId": "bulkTraces",
+                "summary": "Put mutiples traces in 1 call.",
+                "description": "Bulk usage for put some traces."
+            },
             "post": {
                 "requestBody": {
                     "description": "A new `Trace` to be created.",
