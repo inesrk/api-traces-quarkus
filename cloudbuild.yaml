@@ -9,12 +9,17 @@ steps:
 
   # Create image Docker
   - name: "gcr.io/cloud-builders/docker"
-    args: ["build", "-t", "eu.gcr.io/$PROJECT_ID/api-traces-quarkus", "--file", "Dockerfile.native", "."]
+    args: [
+      "build", 
+      "-t", "eu.gcr.io/$PROJECT_ID/api-traces-quarkus:jvm", 
+      "-t", "enterprise-flows-repository/api-traces-quarkus:jvm",
+      "--file", "Dockerfile.jvm", "."]
     dir: src/main/docker
 
   # Push into Docker Repository
   - name: "gcr.io/cloud-builders/docker"
-    args: ["push", "eu.gcr.io/$PROJECT_ID/api-traces-quarkus"]
+    args: [
+      "push", "eu.gcr.io/$PROJECT_ID/api-traces-quarkus:jvm"]
 
   # Deploy K8S configuration
   - name: "gcr.io/cloud-builders/kubectl"
@@ -27,6 +32,16 @@ steps:
       - "CLOUDSDK_COMPUTE_REGION=$_REGION"
       - "CLOUDSDK_CONTAINER_CLUSTER=$_CLUSTER_NAME"
 
+  # Deploy Cloud Run configuration
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args: [
+      'beta', 'run', 
+      'deploy', '[SERVICE_NAME]', 
+      '--image', 'eu.gcr.io/[PROJECT_ID]/[IMAGE]:jvm', 
+      '--region', '[REGION]', 
+      '--platform', 'managed', 
+      '--allow-unauthenticated']
+
 timeout: 660s
 tags: ['api-traces-quarkus']
-images: ["eu.gcr.io/$PROJECT_ID/api-traces-quarkus"]
+images: ["eu.gcr.io/$PROJECT_ID/api-traces-quarkus:jvm"]
