@@ -11,14 +11,5 @@ steps:
       - "CLOUDSDK_COMPUTE_ZONE=$_ZONE"
       - "CLOUDSDK_CONTAINER_CLUSTER=$_CLUSTER_NAME"
 
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args: [
-      'beta', 'run', 
-      'deploy', '[SERVICE_NAME]', 
-      '--image', 'gcr.io/[PROJECT_ID]/[IMAGE]:native', 
-      '--region', '[REGION]', 
-      '--platform', 'managed', 
-      '--allow-unauthenticated']
-
 timeout: 660s
 tags: ['api-traces-quarkus']
