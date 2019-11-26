@@ -1,0 +1,23 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: api-traces-quarkus
+  namespace: default
+  labels:
+    app: api-traces-quarkus
+spec:
+  hosts:
+  - '*'
+  gateways:
+  - api
+  http:
+  - match:
+    - uri:
+        prefix: /traces/v1/
+    rewrite:
+      uri: /
+    route:
+    - destination:
+        port:
+          number: 8080
+        host: api-traces-quarkus
