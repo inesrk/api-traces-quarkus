@@ -1,32 +1,77 @@
 language: java
 
-jdk:
-  - openjdk11
-
-services:
-  - docker
-
 cache:
   directories:
-  - .autoconf
-  - $HOME/.m2
+  # Cache maven's folder
+  - "$HOME/.m2/repository"
+  - "$HOME/.m2/wrapper"
+  # Cache SonarQube's folder
+  - "$HOME/.sonar/cache"
 
-sudo: required
+env:
+  global:
+  # Standard container name (schema: project/application). Used to build the image and push it to the repo
+  - CONTAINER_NAME='enterpriseflowsrepository/api-traces-quarkus'
+  # Short container tag. Contains major, monor & patch values
+  # Example: 1.7.2
+  - CONTAINER_TAG_SHORT=$(./mvnw -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+  # Long container tag. Used to select an unique build version. Allow to quickly know the build date plus the referenced git commit
+  # Example: 1.7.2-20191113211021-921103d
+  - CONTAINER_TAG_FULL="$CONTAINER_TAG_SHORT-$(date +'%Y%m%d%H%M%S')-$(git rev-parse --short HEAD)"
+  # CONTAINER_REPO_HUB_DOCKER_COM_USERNAME
+  - secure: v7Sdq60HAPC+Z521/7oA9HTKT5CIDC0UWFvXBDi3vAoEvodwDhKEryWPKoFsQiNRJs4EUXtllPjHQVnlGNEFW0sG62HM/k4AxeJVDae8p7b1Ti3/XpzF2/4YUw+KBhW/Q0yAPJOZ29G+h9fxeNwVWa+SN6Vun/h3fwqjn502MwV4+YBAi9mLVJ0WLfJt19S9dr5gGdCl/VRstCk8owHbBHMSlO2vlgHfqFBx5iRXc0k0nLVDTNEUU/mFHOm8iXEQn6CgHXUb1gdm5AM1CYVVTJvF9+nndYNvXkS9ZBiIwvFV5PnflzQgqxDFJz9ZbLFe1RP8n3ZyOl5MAd9kv+iSG3+zjz4i2bT+VUL9awKrhQ2CM5UINLmYslW1lCv4fDGr6IIPpVoD+z8u/FX0ppQunoS3CypTSUkvyXoRQwoXgy5ortOaw9OfJG/3uEuYs3MXPyS4xCT6QS4IjG77YBmy7Hi8p+t9f9Tg4SIXprHJ5clem6j/wbt5EJaH8UO7cqL4YQtJNjiFSxdsYokHdnRKAKtfwiegovbbkgRtGhUiEYQubaN0gRO0O+xNZP/KYpCaU8WZ7tn2J2Z9AxN5l5JG9qo2AZ+2HI5wzy/Gfp3AdIt+koWmdO0dJEKPMw+pkufrr5t+hxhAwXhz0gkUXIAYLUJxxFFVExX+Kmef3jV9dVM=
+  # CONTAINER_REPO_HUB_DOCKER_COM_PASSWORD
+  - secure: iype3yaLuZRjWfwibZAZ2Kpk8p6JepSZGzwL4WNvwS7xDO5eDWwWTzSNKpT++3xTXAHMmFG+SWd1q7Gj0CoOgceDf2B7ssczA6Z6hXFLoZ9e86PI4unmUCguBorIX9jShxxLP6CrmcXaVYOunHdunhoidLdheHS/uvm76xN8q8XzkKG3d8ZHKM/JkQCyyVJfJ3Masp/eIUrSx8Lm+VkpcTMFFcFBUc2VMod5l0m0+GSrLSmh0ByAMWpzGeEhM0bK/JGjx7wOMcUaXfMnHIdLWy6UtgI0BoRdqpWsBAhdmaNkjARQEeCkiRmYlNo362bJ8LWqcJZqUSdEGP1Qsv2d+HDGP9y3palxxRVya/GcT7WcYNeOoubJmp3jE271QpoCzs3g7bRl3O63cezqnLaNGqyRxC19o/gwnGiNBX2FDeiv2TMg13K7RAWzIuYYFtDcaj0zGZS5un2uvY6niWilUZMbrbDO1Nw+aoOoKMWZiIe612DOgBbFxXMaZGo+vv8oxembBRcotNsRn3D2l2xC6zqyMZElSg7UCeROShAGAyJxEuPZ9XqFX3mAAj64Jso0WfmbBY1vTGFVMOCiR7IT3yqIQ1toemCvQexJ50fwhTa/p15h+r9wSN/kkj8zSnSZ56ZDLQ3cn/QvIHPUuYRtXqaqeb/4zRkJbln7XNFmpII=
+
+services:
+# We will create containers here!
+- docker
+
+addons:
+  # Post build tests, quality and CVE detection by SonarQube
+  sonarcloud:
+    organization: enterpriseflowsrepository
+    token:
+      secure: ZITqTSTyGa/vSWXipLl43fdvv/VMBktkGo/Kbi9iMnuRpObVUnbAhqMYJIsnD57C0EZRSn+yFeHEamcuyWiKlTVa2KYGlaJKUB/9VEGO0ziouBIn0k/ipnP/uqiNCluEDTrlAiiyokK6x/3koumh1NiUNeOjgqllosmyRejf9qAuvQOUdHEhhxc3yoB0iYJhGecZ+T/ZyoL3iTG2KT/YSXqduQf0qJIRy2YYx+PrwEonpFH6uZYwW6iWvY0d8xZnhpu0Gqwai5DeVMil3xdw5DzQvsfSQV2p4hMX1I5hwJxy6UvHBAE24vt4j5b7PrO8oUMzdt9b5kL/5G99vi9G/etX+hhaKttqWiZ44RkgSKrC33aZSRkhQRh0ftXK6vmEX6neKLQ9qMy7lSYEYuuhlskpZFV2fNWbGW55ARhBpVSWQ7UfuMX8Vo+721T1x6/eJnX2b4xwA4m19qyjYa2tZglCWmcUaIQCyH0pCSLY6w+S2Qoz/JqC6hEBX7LiHYyvVZgINPhKmoAyLuNIr6j5lNv/U8iffE+oQEsz6f+kHX2W65Jw27JALnQcxms0DTyWFA4ZK+hVsNk9F9kOmmF/FFWE+EB5lZhHYu++xAdt2U5z5kdksNt9ybeUyxxsH+DBCdaTfg3CcLJ8otrElkCbNF1I8qf/oO+4gxrr61khsAA=
+  apt:
+    packages:
+    # Force usage of the latest Docker version
+    # See: https://docs.travis-ci.com/user/docker/#installing-a-newer-docker-version
+    - docker-ce
+
+jdk:
+- openjdk11
 
 before_install:
-  - echo "MAVEN_OPTS='-Xmx2048M -Xss128M -XX:+CMSClassUnloadingEnabled -XX:+UseG1GC -XX:-UseGCOverheadLimit'" > ~/.mavenrc
+# Fix maven memory consumption within Travis
+- echo "MAVEN_OPTS='-Xmx2048M -Xss128M -XX:+CMSClassUnloadingEnabled -XX:+UseG1GC -XX:-UseGCOverheadLimit'" > $HOME/.mavenrc
+# Define maven custom repo (requirement for 'api-module-quarkus')
+- cp .travis.settings.xml $HOME/.m2/settings.xml
 
-install: skip
-
-before_script:
-  - cp .travis.settings.xml $HOME/.m2/settings.xml
-
-script: mvn install
+script:
+# Install the maven dependencies
+- ./mvnw clean install
+# Test the pre-build
+- ./mvnw clean verify
+# Build the container (binaries are built into a multistage container)
+- docker build --file src/main/docker/Dockerfile -t "$CONTAINER_NAME" .
 
 after_success:
-  - mvn help:evaluate -N -Dexpression=project.version|grep -v '\['
-  - export project_version=$(mvn help:evaluate -N -Dexpression=project.version|grep -v '\['
-  - mvn deploy
+# Run SonarQube
+- ./mvnw clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=EnterpriseFlowsRepository_api-traces-quarkus
 
 notifications:
-  slack: enterpriseflo-sdf9244:I2PkD1iUs0lMR3Zon4ciy5zS
+  # Notify each build on Slack
+  slack: enterpriseflowsrepo:I2PkD1iUs0lMR3Zon4ciy5zS
+
+deploy:
+# Push builds with default tags to 'docker.io'
+- provider: script
+  script: bash container-push.sh -r docker.io -u "$CONTAINER_REPO_HUB_DOCKER_COM_USERNAME" -p "$CONTAINER_REPO_HUB_DOCKER_COM_PASSWORD" -i "$CONTAINER_NAME" -v "$CONTAINER_TAG_SHORT" -w "$CONTAINER_TAG_FULL" -a default
+  on:
+    all_branches: true
+# Push builds with stable tags to 'docker.io'
+- provider: script
+  script: bash container-push.sh -r docker.io -u "$CONTAINER_REPO_HUB_DOCKER_COM_USERNAME" -p "$CONTAINER_REPO_HUB_DOCKER_COM_PASSWORD" -i "$CONTAINER_NAME" -v "$CONTAINER_TAG_SHORT" -w "$CONTAINER_TAG_FULL" -a stable
+  on:
+    branch: master
