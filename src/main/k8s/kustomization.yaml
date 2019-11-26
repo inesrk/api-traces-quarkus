@@ -1,7 +1,0 @@
-commonLabels:
-  app: api-traces-quarkus
-
-resources:
-- deployment.yaml
-- service.yaml
-- ingress.yaml

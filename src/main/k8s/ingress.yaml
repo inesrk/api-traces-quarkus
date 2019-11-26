@@ -13,4 +13,4 @@ spec:
       - path: /traces/1/*
         backend:
           serviceName: api-traces-quarkus
-          servicePort: 8083
+          servicePort: 8080
