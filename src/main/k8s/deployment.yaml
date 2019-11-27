@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
       - name: api-traces-quarkus
-        image: enterprise-flows-repository/api-traces-quarkus:jvm
+        image: eu.gcr.io/enterpriseflowsrepository-dev/api-traces-quarkus:jvm
         ports:
         - containerPort: 8083
         # resources:

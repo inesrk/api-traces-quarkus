@@ -12,36 +12,35 @@ steps:
     args: [
       "build", 
       "-t", "eu.gcr.io/$PROJECT_ID/api-traces-quarkus:jvm", 
-      "-t", "enterprise-flows-repository/api-traces-quarkus:jvm",
-      "--file", "Dockerfile.jvm", "."]
-    dir: src/main/docker
+      "--file", "src/main/docker/Dockerfile.jvm", 
+      "."]
 
   # Push into Docker Repository
   - name: "gcr.io/cloud-builders/docker"
     args: [
       "push", "eu.gcr.io/$PROJECT_ID/api-traces-quarkus:jvm"]
 
-  # Deploy K8S configuration
-  - name: "gcr.io/cloud-builders/kubectl"
-    args:
-      - apply
-      - -f
-      - src/main/k8s/
-      - --record
-    env:
-      - "CLOUDSDK_COMPUTE_REGION=$_REGION"
-      - "CLOUDSDK_CONTAINER_CLUSTER=$_CLUSTER_NAME"
-
   # Deploy Cloud Run configuration
   - name: 'gcr.io/cloud-builders/gcloud'
     args: [
       'beta', 'run', 
-      'deploy', '[SERVICE_NAME]', 
-      '--image', 'eu.gcr.io/[PROJECT_ID]/[IMAGE]:jvm', 
-      '--region', '[REGION]', 
+      'deploy', 'api-traces-quarkus', 
+      '--image', "eu.gcr.io/$PROJECT_ID/api-traces-quarkus:jvm",
+      '--region', '$_REGION', 
       '--platform', 'managed', 
-      '--allow-unauthenticated']
+      '--memory', '128Mi',
+      '--namespace', 'builds',
+#      '--cpu', '1',
+      '--max-instances', '1',
+      '--timeout', '1m',
+      '--labels', 'api=traces,impl=quarkus',
+#      '--update-env-vars', 'PORT=8085',
+      '--allow-unauthenticated'
+#      '--service-account', 'client-builds@'
+      ]
 
 timeout: 660s
-tags: ['api-traces-quarkus']
-images: ["eu.gcr.io/$PROJECT_ID/api-traces-quarkus:jvm"]
+tags: [
+  'api-traces-quarkus']
+images: [
+  "eu.gcr.io/$PROJECT_ID/api-traces-quarkus"]
