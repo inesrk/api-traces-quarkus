@@ -2,13 +2,14 @@ apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
 kind: Deployment
 metadata:
   name: api-traces-quarkus
+  namespace: default
   labels:
     app: api-traces-quarkus
 spec:
   selector:
     matchLabels:
       app: api-traces-quarkus
-  replicas: 1 
+  replicas: 1
   strategy:
     type: RollingUpdate
   template:
@@ -16,22 +17,25 @@ spec:
       labels:
         app: api-traces-quarkus
     spec:
+      terminationGracePeriodSeconds: 5
+      restartPolicy: Always
       containers:
       - name: api-traces-quarkus
-        image: enterprise-flows-repository/api-traces-quarkus:jvm
+        image: enterpriseflowsrepository/api-traces-quarkus:latest
+        imagePullPolicy: Always
         ports:
-        - containerPort: 8083
-        # resources:
-        #   requests:
-        #     cpu: 200m
-        #     memory: 100Mi
-        #   limits:
-        #     cpu: 400m
-        #     memory: 200Mi
+        - containerPort: 8080
+        resources:
+          requests:
+            cpu: 50m
+            memory: 50Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
         livenessProbe:
           httpGet:
             path: /health/live
-            port: 8083
+            port: 8080
           initialDelaySeconds: 20
           timeoutSeconds: 10
-          periodSeconds: 30
+          periodSeconds: 5

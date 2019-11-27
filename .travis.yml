@@ -1,32 +1,77 @@
 language: java
 
-jdk:
-  - openjdk11
-
-services:
-  - docker
-
 cache:
   directories:
-  - .autoconf
-  - $HOME/.m2
+  # Cache maven's folder
+  - "$HOME/.m2/repository"
+  - "$HOME/.m2/wrapper"
+  # Cache SonarQube's folder
+  - "$HOME/.sonar/cache"
 
-sudo: required
+env:
+  global:
+  # Standard container name (schema: project/application). Used to build the image and push it to the repo
+  - CONTAINER_NAME='enterpriseflowsrepository/api-traces-quarkus'
+  # Short container tag. Contains major, monor & patch values
+  # Example: 1.7.2
+  - CONTAINER_TAG_SHORT=$(./mvnw -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)
+  # Long container tag. Used to select an unique build version. Allow to quickly know the build date plus the referenced git commit
+  # Example: 1.7.2-20191113211021-921103d
+  - CONTAINER_TAG_FULL="$CONTAINER_TAG_SHORT-$(date +'%Y%m%d%H%M%S')-$(git rev-parse --short HEAD)"
+  # CONTAINER_REPO_HUB_DOCKER_COM_USERNAME
+  - secure: ETEz3FnYLi/T+h2zRzVP9degiGrUmV+n+DFIpRzdzDjLPIyyCOChNWxVSKEP5EhDg9Xov39uYOV/yIFhE4cuSYoY4hdrDQnhYyJdXlwjs/e/zVoGT3C5urr14tSChj9LG9Z/cF+TIv7BNITUpEQeFmCIWst2YZJCeY6CCau47EMOrPewvJrz5BOHcT/l+NbLR//VIGXQqmkpUchPYcVCf9rU0ACl9zxTMMkevrCAbDnIq6Nw2rXE5S72t3MtH/0G0FKMAGmap0pUAIQf8yu4bmdyt9TIAMTMJod+m6PGglbsDifJLeKdALprjvjoLhWpTsSbgLRpMOu7WKaCp8Fw0qKpNoLZ15d8pqRTsMau0XY/qp9Z1EnZ/85Qf9RCm7Zef+l50nf/HsMNrBkv9zvxMSpsmutCUAnMLPow0j0E3kmXL0w+8O1VF3a4n85CRm//BpYgvReqHe1BBqNJ095SYJN/qxCgoHTtJ3EuB3O6O3RvDAD8tF/hGOActSHgFqz7d9aiVJj/gkdI4A8HP5le/bpM16Yn8QepX/qEZDh3UGtS4GBillCVQVFvnt0maYzsIM+VbjM10fd2Khbi+/7mPA6p0SDa1eNc5n0gtCvxoJnoSam3Z+eq3jCCMuZOnuOFjm3egtI9J7nkpiyCB6aZlA2+YotobsECsE6hyAwLGzs=
+  # CONTAINER_REPO_HUB_DOCKER_COM_PASSWORD
+  - secure: hmsb9CnypkB7ME3v4fqqqooRfj7VCAHjxd+HFssi0ihYvr/hJ5o7qjUoEafOx+IB0ftrUK4ByPVA3ITI8mP8spHp8UfrfEq0nhLhkJze5EDxn6kMRoqxyZgn9jpCFePY6BkrZYKNbhZZm7o+Z3Ln6wDQsOQ8w/JWyO6sta15v9nIF366weVr8ERrVZ/ElzejkncF9uisu8LB0l4gS6y64OBryyQby4Lausd5a3s9xfhY67eC5Uoilb3yJimjqCBvw+aopZR3rueaRxIbaQsDe9W6vXc7ZzeiHlHvX4XNbx/QEiB1LwS5KLezTX2Rkb7IDd6qit6RPDb7ptLsTkAffLpAjS4G1yT+whFOQHG25Rrr1+a2+MpsHFbo2dTJQYZOtvqZnafSORTkGMsO8VMYKtLNy6pVip5JxdEC5H/G2938cfDRlg7NhR35NgNtKM4JiV6ypnIhOAx6w/yWZYvfgd+g74ey87EyyWg09LVnBdPhVOCX8cIDZ3RksCiKWMBL4+Dy6RVWtkXoSTK7ViSXVO3Cj4S4T79N8blrvL/mU8jAjN3u4qrw1wCwNN3RmwKvlEU+tppDG/FyCwCRX92AMbdRgVJcsS555mCVGJxCAPTNOT9m/JficlF/VSN8xnskjXVGqllrv/Isy1JtcPvZUeVM6/jByo+cTB9cyTPLWRM=
+
+services:
+# We will create containers here!
+- docker
+
+addons:
+  # Post build tests, quality and CVE detection by SonarQube
+  sonarcloud:
+    organization: enterpriseflowsrepository
+    token:
+      secure: TO_ADD
+  apt:
+    packages:
+    # Force usage of the latest Docker version
+    # See: https://docs.travis-ci.com/user/docker/#installing-a-newer-docker-version
+    - docker-ce
+
+jdk:
+- openjdk11
 
 before_install:
-  - echo "MAVEN_OPTS='-Xmx2048M -Xss128M -XX:+CMSClassUnloadingEnabled -XX:+UseG1GC -XX:-UseGCOverheadLimit'" > ~/.mavenrc
+# Fix maven memory consumption within Travis
+- echo "MAVEN_OPTS='-Xmx2048M -Xss128M -XX:+CMSClassUnloadingEnabled -XX:+UseG1GC -XX:-UseGCOverheadLimit'" > $HOME/.mavenrc
+# Define maven custom repo (requirement for 'api-module-quarkus')
+- cp .travis.settings.xml $HOME/.m2/settings.xml
 
-install: skip
-
-before_script:
-  - cp .travis.settings.xml $HOME/.m2/settings.xml
-
-script: mvn install
+script:
+# Install the maven dependencies
+- ./mvnw clean install
+# Test the pre-build
+- ./mvnw clean verify
+# Build the container (binaries are built into a multistage container)
+- docker build --file src/main/docker/Dockerfile -t "$CONTAINER_NAME" .
 
 after_success:
-  - mvn help:evaluate -N -Dexpression=project.version|grep -v '\['
-  - export project_version=$(mvn help:evaluate -N -Dexpression=project.version|grep -v '\['
-  - mvn deploy
+# Run SonarQube
+- ./mvnw clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=EnterpriseFlowsRepository_api-traces-quarkus
 
 notifications:
-  slack: enterpriseflo-sdf9244:I2PkD1iUs0lMR3Zon4ciy5zS
+  # Notify each build on Slack
+  slack: enterpriseflowsrepo:I2PkD1iUs0lMR3Zon4ciy5zS
+
+deploy:
+# Push builds with default tags to 'docker.io'
+- provider: script
+  script: bash container-push.sh -r docker.io -u "$CONTAINER_REPO_HUB_DOCKER_COM_USERNAME" -p "$CONTAINER_REPO_HUB_DOCKER_COM_PASSWORD" -i "$CONTAINER_NAME" -v "$CONTAINER_TAG_SHORT" -w "$CONTAINER_TAG_FULL" -a default
+  on:
+    all_branches: true
+# Push builds with stable tags to 'docker.io'
+- provider: script
+  script: bash container-push.sh -r docker.io -u "$CONTAINER_REPO_HUB_DOCKER_COM_USERNAME" -p "$CONTAINER_REPO_HUB_DOCKER_COM_PASSWORD" -i "$CONTAINER_NAME" -v "$CONTAINER_TAG_SHORT" -w "$CONTAINER_TAG_FULL" -a stable
+  on:
+    branch: master

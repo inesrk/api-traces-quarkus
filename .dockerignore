@@ -1,0 +1,12 @@
+# Ignore all
+*
+
+# Permit sources files
+!src/
+
+# Permit maven configuration file
+!pom.xml
+
+# Permit maven wrapper (.mvn + mvnw)
+!.mvn/
+!mvnw
