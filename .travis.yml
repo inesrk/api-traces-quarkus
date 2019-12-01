@@ -51,14 +51,16 @@ before_install:
 script:
 # Install the maven dependencies
 - ./mvnw clean install
-# Test the pre-build
-- ./mvnw clean verify
 # Build the container (binaries are built into a multistage container)
 - docker build --file src/main/docker/Dockerfile -t "$CONTAINER_NAME" .
 
 after_success:
+# Test the pre-build
+- ./mvnw clean verify
 # Run SonarQube
-- ./mvnw clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=EnterpriseFlowsRepository_api-traces-quarkus
+- ./mvnw clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=EnterpriseFlowsRepository_api-infrastructure-quarkus
+# Test the container by attacking the app
+- ./src/main/docker/security-owasp-zap.sh
 
 notifications:
   # Notify each build on Slack
@@ -67,11 +69,11 @@ notifications:
 deploy:
 # Push builds with default tags to 'docker.io'
 - provider: script
-  script: bash container-push.sh -r docker.io -u "$CONTAINER_REPO_HUB_DOCKER_COM_USERNAME" -p "$CONTAINER_REPO_HUB_DOCKER_COM_PASSWORD" -i "$CONTAINER_NAME" -v "$CONTAINER_TAG_SHORT" -w "$CONTAINER_TAG_FULL" -a default
+  script: bash ./src/main/docker/container-push.sh -r docker.io -u "$CONTAINER_REPO_HUB_DOCKER_COM_USERNAME" -p "$CONTAINER_REPO_HUB_DOCKER_COM_PASSWORD" -i "$CONTAINER_NAME" -v "$CONTAINER_TAG_SHORT" -w "$CONTAINER_TAG_FULL" -a default
   on:
     all_branches: true
 # Push builds with stable tags to 'docker.io'
 - provider: script
-  script: bash container-push.sh -r docker.io -u "$CONTAINER_REPO_HUB_DOCKER_COM_USERNAME" -p "$CONTAINER_REPO_HUB_DOCKER_COM_PASSWORD" -i "$CONTAINER_NAME" -v "$CONTAINER_TAG_SHORT" -w "$CONTAINER_TAG_FULL" -a stable
+  script: bash ./src/main/docker/container-push.sh -r docker.io -u "$CONTAINER_REPO_HUB_DOCKER_COM_USERNAME" -p "$CONTAINER_REPO_HUB_DOCKER_COM_PASSWORD" -i "$CONTAINER_NAME" -v "$CONTAINER_TAG_SHORT" -w "$CONTAINER_TAG_FULL" -a stable
   on:
     branch: master
