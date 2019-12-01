@@ -11,10 +11,17 @@ WORKDIR /usr/src/app
 # Do all actions as super user (life is easy 👼)
 USER root
 
+# Copy maven + pom.xml, optimization for caching and speed-up this step
+COPY pom.xml mvnw ./
+COPY .mvn .mvn
+
+# Install the maven dependencies
+RUN ./mvnw clean install
+
 # Copy source folder, they will be used to build app from sources (see .dockerignore file specs)
 COPY . .
 
-# Build app from sources
+# Build the app
 RUN ./mvnw clean package -Pnative
 
 ######
