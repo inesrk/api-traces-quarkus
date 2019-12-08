@@ -23,7 +23,12 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 })
 public class Application {
 
+    /**
+     * Name of Information System.
+     * 
+     */
     @JsonProperty("informationSystem")
+    @JsonPropertyDescription("Name of Information System.")
     private String informationSystem;
     /**
      * Name of application.
@@ -32,7 +37,12 @@ public class Application {
     @JsonProperty("application")
     @JsonPropertyDescription("Name of application.")
     private String application;
+    /**
+     * hostname where application is running.
+     * 
+     */
     @JsonProperty("hostname")
+    @JsonPropertyDescription("hostname where application is running.")
     private String hostname;
     /**
      * Creation date of send.
@@ -42,11 +52,19 @@ public class Application {
     @JsonPropertyDescription("Creation date of send.")
     private Date created;
 
+    /**
+     * Name of Information System.
+     * 
+     */
     @JsonProperty("informationSystem")
     public String getInformationSystem() {
         return informationSystem;
     }
 
+    /**
+     * Name of Information System.
+     * 
+     */
     @JsonProperty("informationSystem")
     public void setInformationSystem(String informationSystem) {
         this.informationSystem = informationSystem;
@@ -70,11 +88,19 @@ public class Application {
         this.application = application;
     }
 
+    /**
+     * hostname where application is running.
+     * 
+     */
     @JsonProperty("hostname")
     public String getHostname() {
         return hostname;
     }
 
+    /**
+     * hostname where application is running.
+     * 
+     */
     @JsonProperty("hostname")
     public void setHostname(String hostname) {
         this.hostname = hostname;

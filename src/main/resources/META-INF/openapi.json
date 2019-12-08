@@ -3,10 +3,10 @@
     "info": {
         "title": "Enterprise Flows Repository - Traces",
         "version": "1.0.0",
-        "description": "Mediation part for EFR.",
+        "description": "Manage Traces for Enterprise Flows Repository.",
         "contact": {
             "name": "Emmanuel LESNE",
-            "url": "https://github.com/EnterpriseFlowsRepository",
+            "url": "https://www.enterpriseflowsrepository.org",
             "email": "emmanuel.lesne@middleware-solutions.fr"
         },
         "license": {
@@ -14,6 +14,30 @@
             "url": "https://www.apache.org/licenses/LICENSE-2.0"
         }
     },
+    "servers": [
+        {
+            "url": "http://{domain}.enterpriseflowsrepository.org:{port}/api/{module}/{version}",
+            "description": "Open Source environment.",
+            "variables": {
+                "domain": {
+                    "enum": [
+                        "builds",
+                        "demo"
+                    ],
+                    "default": "builds"
+                },
+                "port": {
+                    "default": "443"
+                },
+                "module": {
+                    "default": "traces"
+                },
+                "version": {
+                    "default": "1"
+                }
+            }
+        }
+    ],
     "paths": {
         "/trace": {
             "summary": "Path used to manage the list of traces.",
@@ -74,7 +98,7 @@
                         "$ref": "#/components/responses/Error"
                     }
                 },
-                "operationId": "gettraces",
+                "operationId": "listTraces",
                 "summary": "List All traces",
                 "description": "Gets a list of all `Trace` entities."
             },
@@ -130,7 +154,7 @@
                         "$ref": "#/components/responses/Error"
                     }
                 },
-                "operationId": "createTrace",
+                "operationId": "addTrace",
                 "summary": "Create a Trace",
                 "description": "Creates a new instance of a `Trace`."
             }
@@ -139,6 +163,9 @@
             "summary": "Path used to manage a single Trace.",
             "description": "The REST endpoint/path used to get, update, and delete single instances of an `Trace`.  This path contains `GET`, `PUT`, and `DELETE` operations used to perform the get, update, and delete tasks, respectively.",
             "get": {
+                "tags": [
+                    "trace"
+                ],
                 "responses": {
                     "200": {
                         "content": {
@@ -422,7 +449,8 @@
                         "stacktrace": "..."
                     },
                     "infrastructure": {
-                        "hostname": "serverName2"
+                        "hostname": "serverName2",
+                        "datacenter": "paris"
                     }
                 }
             },
@@ -448,7 +476,8 @@
                 "description": "Message description.",
                 "required": [
                     "level",
-                    "MessageID"
+                    "MessageID",
+                    "type"
                 ],
                 "type": "object",
                 "properties": {
@@ -475,7 +504,6 @@
                     "type": {
                         "description": "Type of this trace.",
                         "enum": [
-                            "error",
                             "business",
                             "technical"
                         ],
@@ -510,8 +538,8 @@
                             "value": "1234EFG"
                         }
                     ],
-                    "type": "error|business|tecnical",
-                    "level": "debug|info|warn|error",
+                    "type": "business",
+                    "level": "error",
                     "body": "..."
                 }
             },
@@ -521,15 +549,23 @@
                 "type": "object",
                 "properties": {
                     "protocol": {
+                        "description": "Name of protocol.",
+                        "enum": [
+                            "file",
+                            "queue",
+                            "http",
+                            "stream"
+                        ],
                         "type": "string"
                     },
                     "source": {
+                        "description": "Name of source. Text free.",
                         "type": "string"
                     }
                 },
                 "example": {
-                    "protocol": "file|queue|http",
-                    "source": "fileName|queueName"
+                    "protocol": "file",
+                    "source": "fileName.txt"
                 }
             },
             "Route": {
@@ -584,6 +620,7 @@
                 "type": "object",
                 "properties": {
                     "informationSystem": {
+                        "description": "Name of Information System.",
                         "type": "string"
                     },
                     "application": {
@@ -591,6 +628,7 @@
                         "type": "string"
                     },
                     "hostname": {
+                        "description": "hostname where application is running.",
                         "type": "string"
                     },
                     "created": {
@@ -643,10 +681,15 @@
                     "hostname": {
                         "description": "host of server.",
                         "type": "string"
+                    },
+                    "datacenter": {
+                        "description": "Name of DataCenter.",
+                        "type": "string"
                     }
                 },
                 "example": {
-                    "hostname": "serverName2"
+                    "hostname": "server1",
+                    "datacenter": "DC1"
                 }
             },
             "Error": {

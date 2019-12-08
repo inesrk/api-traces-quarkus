@@ -64,6 +64,7 @@ public class Message {
     private List<Key> headers = new ArrayList<Key>();
     /**
      * Type of this trace.
+     * (Required)
      * 
      */
     @JsonProperty("type")
@@ -163,6 +164,7 @@ public class Message {
 
     /**
      * Type of this trace.
+     * (Required)
      * 
      */
     @JsonProperty("type")
@@ -172,6 +174,7 @@ public class Message {
 
     /**
      * Type of this trace.
+     * (Required)
      * 
      */
     @JsonProperty("type")
@@ -260,7 +263,6 @@ public class Message {
 
     public enum Type {
 
-        error("error"),
         business("business"),
         technical("technical");
         private final String value;

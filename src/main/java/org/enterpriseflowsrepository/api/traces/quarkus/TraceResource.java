@@ -24,7 +24,7 @@ public interface TraceResource {
    */
   @GET
   @Produces("application/json")
-  List<Trace> gettraces(@QueryParam("after") Date after, @QueryParam("before") Date before,
+  List<Trace> listTraces(@QueryParam("after") Date after, @QueryParam("before") Date before,
       @QueryParam("keys") List<String> keys);
 
   /**
@@ -39,7 +39,7 @@ public interface TraceResource {
    */
   @POST
   @Consumes("application/json")
-  void createTrace(Trace data);
+  void addTrace(Trace data);
 
   /**
    * Gets the details of a single instance of a `Trace`.

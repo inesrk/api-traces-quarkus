@@ -15,7 +15,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "hostname"
+    "hostname",
+    "datacenter"
 })
 public class Infrastructure {
 
@@ -26,6 +27,13 @@ public class Infrastructure {
     @JsonProperty("hostname")
     @JsonPropertyDescription("host of server.")
     private String hostname;
+    /**
+     * Name of DataCenter.
+     * 
+     */
+    @JsonProperty("datacenter")
+    @JsonPropertyDescription("Name of DataCenter.")
+    private String datacenter;
 
     /**
      * host of server.
@@ -43,6 +51,24 @@ public class Infrastructure {
     @JsonProperty("hostname")
     public void setHostname(String hostname) {
         this.hostname = hostname;
+    }
+
+    /**
+     * Name of DataCenter.
+     * 
+     */
+    @JsonProperty("datacenter")
+    public String getDatacenter() {
+        return datacenter;
+    }
+
+    /**
+     * Name of DataCenter.
+     * 
+     */
+    @JsonProperty("datacenter")
+    public void setDatacenter(String datacenter) {
+        this.datacenter = datacenter;
     }
 
 }
