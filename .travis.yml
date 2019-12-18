@@ -58,7 +58,7 @@ after_success:
 # Test the pre-build
 - ./mvnw clean verify
 # Run SonarQube
-- ./mvnw clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=EnterpriseFlowsRepository_api-infrastructure-quarkus
+- ./mvnw clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=EnterpriseFlowsRepository_api-traces-quarkus
 # Test the container by attacking the app
 - ./src/main/docker/security-owasp-zap.sh
 
