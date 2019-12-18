@@ -10,7 +10,7 @@
   <parent>
     <groupId>org.enterpriseflowsrepository.api.module</groupId>
     <artifactId>api-module-quarkus</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.1</version>
   </parent>
 
   <properties>
