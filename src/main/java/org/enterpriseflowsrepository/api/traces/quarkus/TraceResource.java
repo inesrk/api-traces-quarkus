@@ -3,6 +3,7 @@ package org.enterpriseflowsrepository.api.traces.quarkus;
 import java.lang.String;
 import java.util.Date;
 import java.util.List;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -12,33 +13,37 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+
 import org.enterpriseflowsrepository.api.traces.quarkus.beans.Trace;
+
 
 /**
  * A JAX-RS interface.  An implementation of this interface must be provided.
  */
 @Path("/trace")
 public interface TraceResource {
+
   /**
    * Gets a list of all `Trace` entities.
    */
   @GET
-  @Produces("application/json")
-  List<Trace> gettraces(@QueryParam("after") Date after, @QueryParam("before") Date before,
+  @Produces(MediaType.APPLICATION_JSON)
+  List<Trace> getTraces(@QueryParam("after") Date after, @QueryParam("before") Date before,
       @QueryParam("keys") List<String> keys);
 
   /**
    * Bulk usage for put some traces.
    */
   @PUT
-  @Consumes("application/json")
+  @Consumes(MediaType.APPLICATION_JSON)
   void bulkTraces(List<Trace> data);
 
   /**
    * Creates a new instance of a `Trace`.
    */
   @POST
-  @Consumes("application/json")
+  @Consumes(MediaType.APPLICATION_JSON)
   void createTrace(Trace data);
 
   /**
@@ -46,7 +51,7 @@ public interface TraceResource {
    */
   @Path("/{traceId}")
   @GET
-  @Produces("application/json")
+  @Produces(MediaType.APPLICATION_JSON)
   Trace getTrace(@PathParam("traceId") String traceId);
 
   /**
@@ -54,7 +59,7 @@ public interface TraceResource {
    */
   @Path("/{traceId}")
   @PUT
-  @Consumes("application/json")
+  @Consumes(MediaType.APPLICATION_JSON)
   void updateTrace(@PathParam("traceId") String traceId, Trace data);
 
   /**

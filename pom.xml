@@ -14,6 +14,7 @@
   </parent>
 
   <properties>
+    <elasticsearch-rest-client.version>7.5.1</elasticsearch-rest-client.version>
   </properties>
 
   <repositories>
@@ -59,12 +60,9 @@
     </dependency>
     
     <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-hibernate-orm</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-jdbc-h2</artifactId>
+      <groupId>org.elasticsearch.client</groupId>
+      <artifactId>elasticsearch-rest-high-level-client</artifactId>
+      <version>${elasticsearch-rest-client.version}</version>
     </dependency>
   </dependencies>
 
