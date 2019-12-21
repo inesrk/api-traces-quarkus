@@ -22,10 +22,6 @@ public class HttpClient {
         this.client = client;
     }
 
-    public void createIndex() {
-        //
-    }
-
     public CompletableFuture<GetResponse> findAsync(String index, String id) {
         return CompletableFuture.supplyAsync(() -> {
             GetRequest req = new GetRequest(index, id);

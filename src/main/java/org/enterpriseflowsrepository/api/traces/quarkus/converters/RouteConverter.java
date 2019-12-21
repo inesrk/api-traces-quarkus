@@ -2,20 +2,16 @@ package org.enterpriseflowsrepository.api.traces.quarkus.converters;
 
 import org.enterpriseflowsrepository.api.traces.quarkus.beans.Route;
 import org.enterpriseflowsrepository.api.traces.quarkus.model.*;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.ClientErrorException;
 
 
 @ApplicationScoped
 public class RouteConverter extends AbstractConverter<RouteModel, Route> {
-    
-    public RouteConverter() {
-        super();
-    }
 
     @Override
-    public Route toDto(RouteModel model) 
-    throws ClientErrorException {
+    public Route toDto(RouteModel model) throws ClientErrorException {
         if (model == null) {
             return null;
         }

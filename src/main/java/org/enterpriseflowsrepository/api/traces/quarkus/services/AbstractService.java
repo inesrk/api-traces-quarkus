@@ -2,6 +2,7 @@ package org.enterpriseflowsrepository.api.traces.quarkus.services;
 
 import java.util.logging.Logger;
 
+
 public abstract class AbstractService {
 
     /** Logger **/

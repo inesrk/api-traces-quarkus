@@ -29,13 +29,8 @@ public class TraceConverter extends AbstractConverter<TraceModel, Trace> {
     @Inject
     RouteConverter routeConverter;
     
-    public TraceConverter() {
-        super();
-    }
-    
     @Override
-    public Trace toDto(TraceModel model) 
-    throws ClientErrorException {
+    public Trace toDto(TraceModel model) throws ClientErrorException {
         if (model == null) {
             return null;
         }

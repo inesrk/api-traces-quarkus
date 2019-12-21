@@ -2,20 +2,16 @@ package org.enterpriseflowsrepository.api.traces.quarkus.converters;
 
 import org.enterpriseflowsrepository.api.traces.quarkus.beans.Source;
 import org.enterpriseflowsrepository.api.traces.quarkus.model.*;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.ClientErrorException;
 
 
 @ApplicationScoped
 public class SourceConverter extends AbstractConverter<SourceModel, Source> {
-    
-    public SourceConverter() {
-        super();
-    }
 
     @Override
-    public Source toDto(SourceModel model) 
-    throws ClientErrorException {
+    public Source toDto(SourceModel model) throws ClientErrorException {
         if (model == null) {
             return null;
         }

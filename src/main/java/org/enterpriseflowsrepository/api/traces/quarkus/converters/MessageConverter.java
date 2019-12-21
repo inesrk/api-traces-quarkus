@@ -2,6 +2,7 @@ package org.enterpriseflowsrepository.api.traces.quarkus.converters;
 
 import org.enterpriseflowsrepository.api.traces.quarkus.beans.Message;
 import org.enterpriseflowsrepository.api.traces.quarkus.model.*;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.ClientErrorException;
@@ -12,14 +13,9 @@ public class MessageConverter extends AbstractConverter<MessageModel, Message> {
     
     @Inject
     KeyConverter keyConverter;
-    
-    public MessageConverter() {
-        super();
-    }
 
     @Override
-    public Message toDto(MessageModel model) 
-    throws ClientErrorException {
+    public Message toDto(MessageModel model) throws ClientErrorException {
         if (model == null) {
             return null;
         }

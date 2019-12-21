@@ -2,20 +2,16 @@ package org.enterpriseflowsrepository.api.traces.quarkus.converters;
 
 import org.enterpriseflowsrepository.api.traces.quarkus.beans.Exception;
 import org.enterpriseflowsrepository.api.traces.quarkus.model.*;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.ClientErrorException;
 
 
 @ApplicationScoped
 public class ExceptionConverter extends AbstractConverter<ExceptionModel, Exception> {
-    
-    public ExceptionConverter() {
-        super();
-    }
 
     @Override
-    public Exception toDto(ExceptionModel model) 
-    throws ClientErrorException {
+    public Exception toDto(ExceptionModel model) throws ClientErrorException {
         if (model == null) {
             return null;
         }

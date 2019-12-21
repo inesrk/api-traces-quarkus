@@ -2,20 +2,16 @@ package org.enterpriseflowsrepository.api.traces.quarkus.converters;
 
 import org.enterpriseflowsrepository.api.traces.quarkus.beans.Key;
 import org.enterpriseflowsrepository.api.traces.quarkus.model.*;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.ClientErrorException;
 
 
 @ApplicationScoped
 public class KeyConverter extends AbstractConverter<KeyModel, Key> {
-    
-    public KeyConverter() {
-        super();
-    }
 
     @Override
-    public Key toDto(KeyModel model) 
-    throws ClientErrorException {
+    public Key toDto(KeyModel model) throws ClientErrorException {
         if (model == null) {
             return null;
         }

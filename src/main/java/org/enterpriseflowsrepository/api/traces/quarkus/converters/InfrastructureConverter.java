@@ -2,20 +2,16 @@ package org.enterpriseflowsrepository.api.traces.quarkus.converters;
 
 import org.enterpriseflowsrepository.api.traces.quarkus.beans.Infrastructure;
 import org.enterpriseflowsrepository.api.traces.quarkus.model.*;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.ClientErrorException;
 
 
 @ApplicationScoped
 public class InfrastructureConverter extends AbstractConverter<InfrastructureModel, Infrastructure> {
-    
-    public InfrastructureConverter() {
-        super();
-    }
 
     @Override
-    public Infrastructure toDto(InfrastructureModel model) 
-    throws ClientErrorException {
+    public Infrastructure toDto(InfrastructureModel model) throws ClientErrorException {
         if (model == null) {
             return null;
         }
