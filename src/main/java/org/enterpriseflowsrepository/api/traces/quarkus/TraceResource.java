@@ -37,14 +37,16 @@ public interface TraceResource {
    */
   @PUT
   @Consumes(MediaType.APPLICATION_JSON)
-  void bulkTraces(List<Trace> data);
+  @Produces(MediaType.APPLICATION_JSON)
+  List<Trace> bulkTraces(List<Trace> data);
 
   /**
    * Creates a new instance of a `Trace`.
    */
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
-  void createTrace(Trace data);
+  @Produces(MediaType.APPLICATION_JSON)
+  Trace createTrace(Trace data);
 
   /**
    * Gets the details of a single instance of a `Trace`.
@@ -60,7 +62,8 @@ public interface TraceResource {
   @Path("/{traceId}")
   @PUT
   @Consumes(MediaType.APPLICATION_JSON)
-  void updateTrace(@PathParam("traceId") String traceId, Trace data);
+  @Produces(MediaType.APPLICATION_JSON)
+  Trace updateTrace(@PathParam("traceId") String traceId, Trace data);
 
   /**
    * Deletes an existing `Trace`.

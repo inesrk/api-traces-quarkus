@@ -5,10 +5,13 @@ import java.util.List;
 
 import org.enterpriseflowsrepository.api.traces.quarkus.beans.Trace;
 import org.enterpriseflowsrepository.api.traces.quarkus.converters.TraceConverter;
+import org.enterpriseflowsrepository.api.traces.quarkus.model.TraceModel;
 import org.enterpriseflowsrepository.api.traces.quarkus.repository.TraceRepository;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.ws.rs.NotFoundException;
+
 import org.enterpriseflowsrepository.api.traces.quarkus.TraceResource;
 
 
@@ -26,17 +29,23 @@ public class TraceService extends AbstractService implements TraceResource {
     }
 
     @Override
-    public void createTrace(Trace data) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Trace createTrace(Trace data) {
+        return converter.toDto(traceRepo.create(converter.toModel(data)));
     }
 
     @Override
     public Trace getTrace(String name) {
-        return traceRepo.getByKey(name);
+        TraceModel model = traceRepo.getById(name);
+
+        if(model == null)  {
+            throw new NotFoundException(name);
+        }
+        
+        return converter.toDto(model);
     }
 
     @Override
-    public void updateTrace(String name, Trace data) {
+    public Trace updateTrace(String name, Trace data) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -51,7 +60,7 @@ public class TraceService extends AbstractService implements TraceResource {
     }
 
     @Override
-    public void bulkTraces(List<Trace> data) {
+    public List<Trace> bulkTraces(List<Trace> data) {
         throw new UnsupportedOperationException("Not supported yet.");
     }   
 }

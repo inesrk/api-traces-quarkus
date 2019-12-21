@@ -17,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
+    "id",
     "version",
     "environnement",
     "message",
@@ -27,6 +28,14 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "infrastructure"
 })
 public class Trace {
+
+    /**
+     * Identifier of this object.
+     * 
+     */
+    @JsonProperty("id")
+    @JsonPropertyDescription("Identifier of this object.")
+    private String id;
 
     /**
      * Version of this format.
@@ -99,6 +108,24 @@ public class Trace {
     @JsonProperty("infrastructure")
     @JsonPropertyDescription("Infrastructure where transport is executed.")
     private Infrastructure infrastructure;
+
+    /**
+     * Identifier of this object.
+     * 
+     */
+    @JsonProperty("id")
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * Identifier of this object.
+     * 
+     */
+    @JsonProperty("id")
+    public void setId(String id) {
+        this.id = id;
+    }
 
     /**
      * Version of this format.

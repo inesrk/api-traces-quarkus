@@ -7,9 +7,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
+import org.enterpriseflowsrepository.api.traces.quarkus.clients.elasticsearch.AbstractDocument;
+
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class TraceModel {
+public class TraceModel extends AbstractDocument {
 
     /**
      * Version of this format.

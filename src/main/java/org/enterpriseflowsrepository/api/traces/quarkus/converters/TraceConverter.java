@@ -40,6 +40,7 @@ public class TraceConverter extends AbstractConverter<TraceModel, Trace> {
         dto.getBusiness().addAll(keyConverter.toDto(model.getBusiness()));
         dto.setEnvironnement(model.getEnvironnement());
         dto.setException(exceptionConverter.toDto(model.getException()));
+        dto.setId(model.getId());
         dto.setInfrastructure(infrastructureConverter.toDto(model.getInfrastructure()));
         dto.setMessage(messageConverter.toDto(model.getMessage()));
         dto.setOrigin(sourceConverter.toDto(model.getOrigin()));
@@ -68,6 +69,7 @@ public class TraceConverter extends AbstractConverter<TraceModel, Trace> {
         model.getBusiness().addAll(keyConverter.toModel(dto.getBusiness()));
         model.setEnvironnement(dto.getEnvironnement());
         model.setException(exceptionConverter.toModel(dto.getException()));
+        model.setId(dto.getId());
         model.setInfrastructure(infrastructureConverter.toModel(dto.getInfrastructure()));
         model.setMessage(messageConverter.toModel(dto.getMessage()));
         model.setOrigin(sourceConverter.toModel(dto.getOrigin()));

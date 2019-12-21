@@ -1,40 +1,71 @@
 package org.enterpriseflowsrepository.api.traces.quarkus.repository;
 
-import org.enterpriseflowsrepository.api.traces.quarkus.beans.Trace;
+import org.elasticsearch.ElasticsearchStatusException;
+import org.enterpriseflowsrepository.api.traces.quarkus.model.TraceModel;
 import org.enterpriseflowsrepository.api.traces.quarkus.clients.elasticsearch.HttpClient;
 
-import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.logging.Logger;
 
 
 @ApplicationScoped
 public class TraceRepository {
-    
+
+    /** Logger **/
+    protected static final Logger LOG = Logger.getLogger(TraceRepository.class.getName());
+
     @Inject
     HttpClient elasticClient;
-    
-    public Trace getByKey(String id) {
-        ObjectMapper mapper = new ObjectMapper();
 
-        String json;
+    @PostConstruct
+    void initialization() {
+        // test if the index exists or not
+        boolean isExistsIndex = false;
         try {
-            json = elasticClient.findAsync("traces", id).get().getSourceAsString();
+           isExistsIndex = elasticClient.existsIndexAsync("traces").get(); 
+        } catch (ElasticsearchStatusException e) {
+            throw new RuntimeException(e);
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }
 
+        // is the index already exists, abort
+        if(isExistsIndex) return;
+
+        // if not found on the db, create the index
         try {
-            return mapper.readValue(json, Trace.class);
-        } catch (JsonParseException | JsonMappingException e) {
+            elasticClient.createIndexAsync("traces").get();
+        } catch (ElasticsearchStatusException e) {
             throw new RuntimeException(e);
-        } catch (IOException e) {
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public TraceModel create(TraceModel data) {
+        TraceModel stored = null;
+        try {
+            stored = (TraceModel) elasticClient.createAsync("traces", data).get();
+        } catch (ElasticsearchStatusException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException(e);
+        }
+
+        return stored;
+    }
+    
+    public TraceModel getById(String id) {
+        try {
+            return (TraceModel) elasticClient.findAsync("traces", id, TraceModel.class, false).get();
+        } catch (ElasticsearchStatusException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }
     }
