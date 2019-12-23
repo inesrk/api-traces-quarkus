@@ -11,6 +11,7 @@ import org.enterpriseflowsrepository.api.traces.quarkus.repository.TraceReposito
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.NotFoundException;
+import javax.ws.rs.core.Response;
 
 import org.enterpriseflowsrepository.api.traces.quarkus.TraceResource;
 
@@ -29,8 +30,9 @@ public class TraceService extends AbstractService implements TraceResource {
     }
 
     @Override
-    public Trace createTrace(Trace data) {
-        return converter.toDto(traceRepo.create(converter.toModel(data)));
+    public Response createTrace(Trace data) {
+        traceRepo.create(converter.toModel(data));
+        return Response.status(Response.Status.CREATED).build();
     }
 
     @Override
@@ -50,7 +52,7 @@ public class TraceService extends AbstractService implements TraceResource {
     }
 
     @Override
-    public void deleteTrace(String name) {
+    public Response deleteTrace(String name) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -60,7 +62,8 @@ public class TraceService extends AbstractService implements TraceResource {
     }
 
     @Override
-    public List<Trace> bulkTraces(List<Trace> data) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }   
+    public Response bulkTraces(List<Trace> data) {
+        traceRepo.create(converter.toModel(data));
+        return Response.status(Response.Status.CREATED).build();
+    }
 }

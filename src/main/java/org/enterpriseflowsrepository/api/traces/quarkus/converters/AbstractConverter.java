@@ -10,8 +10,7 @@ import org.enterpriseflowsrepository.api.traces.quarkus.services.AbstractService
 
 
 public abstract class AbstractConverter <ModelClass, DtoClass> {
-
-    /** Logger **/
+    
     protected static final Logger LOG = Logger.getLogger(AbstractService.class.getName());
 
     public AbstractConverter() {

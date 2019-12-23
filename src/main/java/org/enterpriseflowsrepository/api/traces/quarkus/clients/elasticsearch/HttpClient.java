@@ -1,8 +1,8 @@
 package org.enterpriseflowsrepository.api.traces.quarkus.clients.elasticsearch;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 import java.util.logging.Logger;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -14,23 +14,26 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.apache.http.HttpHost;
 import org.elasticsearch.action.ActionListener;
+import org.elasticsearch.action.bulk.BulkRequest;
+import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.get.GetRequest;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
+import org.elasticsearch.action.support.WriteRequest;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.client.indices.CreateIndexRequest;
 import org.elasticsearch.client.indices.CreateIndexResponse;
 import org.elasticsearch.client.indices.GetIndexRequest;
+import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.common.xcontent.XContentType;
 
 @ApplicationScoped
 public class HttpClient {
-
-    /** Logger **/
-    protected static final Logger LOG = Logger.getLogger(HttpClient.class.getName());
+    
+    private static final Logger LOG = Logger.getLogger(HttpClient.class.getName());
     
     private RestHighLevelClient client;
 
@@ -58,8 +61,44 @@ public class HttpClient {
         return future;
     }
 
-    public CompletableFuture<Object> createAsync(String index, Object data) {
-        CompletableFuture<String> future = new CompletableFuture<>();
+    public CompletableFuture<BulkResponse> createAsync(String index, List<? extends AbstractDocument> datas) {
+        CompletableFuture<BulkResponse> future = new CompletableFuture<>();
+        ObjectMapper jsonMapper = new ObjectMapper();
+        
+        BulkRequest req = new BulkRequest();
+        req.timeout(TimeValue.timeValueMinutes(2));
+        req.setRefreshPolicy(WriteRequest.RefreshPolicy.WAIT_UNTIL);
+
+        for (AbstractDocument data : datas) {
+            String json = null;
+            try {
+                json = jsonMapper.writeValueAsString(data);
+            } catch (JsonProcessingException e) {
+                future.completeExceptionally(e);
+            }
+            
+            req.add(new IndexRequest(index).source(json, XContentType.JSON));
+        }
+
+        ActionListener<BulkResponse> listener = new ActionListener<BulkResponse>() {
+            @Override
+            public void onResponse(BulkResponse res) {
+                future.complete(res);
+            }
+        
+            @Override
+            public void onFailure(Exception e) {
+                future.completeExceptionally(e);
+            }
+        };
+        
+        getClient().bulkAsync(req, RequestOptions.DEFAULT, listener);
+        
+        return future;
+    }
+
+    public CompletableFuture<IndexResponse> createAsync(String index, AbstractDocument data) {
+        CompletableFuture<IndexResponse> future = new CompletableFuture<>();
         ObjectMapper jsonMapper = new ObjectMapper();
 
         String json = null;
@@ -74,8 +113,7 @@ public class HttpClient {
         ActionListener<IndexResponse> listener = new ActionListener<IndexResponse>() {
             @Override
             public void onResponse(IndexResponse res) {
-                String storedId = res.getId();
-                future.complete(storedId);
+                future.complete(res);
             }
         
             @Override
@@ -85,17 +123,8 @@ public class HttpClient {
         };
         
         getClient().indexAsync(req, RequestOptions.DEFAULT, listener);
-
-        return future.thenApplyAsync((storedId) -> {
-            Object storedData = null;
-            try {
-                storedData = findAsync(index, storedId, data.getClass(), true).get();
-            } catch (InterruptedException | ExecutionException e) {
-                future.completeExceptionally(e);
-            }
-
-            return storedData;
-        });
+        
+        return future;
     }
 
     public CompletableFuture<CreateIndexResponse> createIndexAsync(String name) {
@@ -119,8 +148,8 @@ public class HttpClient {
         return future;
     }
 
-    public CompletableFuture<Object> findAsync(String index, String id, Class<? extends Object> source, boolean forceRefresh) {
-        CompletableFuture<Object> future = new CompletableFuture<>();
+    public CompletableFuture<? extends AbstractDocument> findAsync(String index, String id, Class<? extends AbstractDocument> source, boolean forceRefresh) {
+        CompletableFuture<AbstractDocument> future = new CompletableFuture<>();
         
         GetRequest req = new GetRequest(index, id);
         req.realtime(false);
@@ -137,17 +166,13 @@ public class HttpClient {
         
                 String json = res.getSourceAsString();
         
-                Object data = null;
+                AbstractDocument data = null;
                 try {
                     data = jsonMapper.readValue(json, source);
                 } catch (JsonParseException | JsonMappingException e) {
                     future.completeExceptionally(e);
                 } catch (IOException e) {
                     future.completeExceptionally(e);
-                }
-
-                if(data instanceof AbstractDocument) {
-                    ((AbstractDocument) data).setId(res.getId());
                 }
 
                 future.complete(data);

@@ -14,6 +14,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.enterpriseflowsrepository.api.traces.quarkus.beans.Trace;
 
@@ -29,24 +30,21 @@ public interface TraceResource {
    */
   @GET
   @Produces(MediaType.APPLICATION_JSON)
-  List<Trace> getTraces(@QueryParam("after") Date after, @QueryParam("before") Date before,
-      @QueryParam("keys") List<String> keys);
+  List<Trace> getTraces(@QueryParam("after") Date after, @QueryParam("before") Date before, @QueryParam("keys") List<String> keys);
 
   /**
    * Bulk usage for put some traces.
    */
   @PUT
   @Consumes(MediaType.APPLICATION_JSON)
-  @Produces(MediaType.APPLICATION_JSON)
-  List<Trace> bulkTraces(List<Trace> data);
+  Response bulkTraces(List<Trace> data);
 
   /**
    * Creates a new instance of a `Trace`.
    */
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
-  @Produces(MediaType.APPLICATION_JSON)
-  Trace createTrace(Trace data);
+  Response createTrace(Trace data);
 
   /**
    * Gets the details of a single instance of a `Trace`.
@@ -70,5 +68,5 @@ public interface TraceResource {
    */
   @Path("/{traceId}")
   @DELETE
-  void deleteTrace(@PathParam("traceId") String traceId);
+  Response deleteTrace(@PathParam("traceId") String traceId);
 }
