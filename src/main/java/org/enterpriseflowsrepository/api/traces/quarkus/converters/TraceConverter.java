@@ -3,10 +3,6 @@ package org.enterpriseflowsrepository.api.traces.quarkus.converters;
 import org.enterpriseflowsrepository.api.traces.quarkus.beans.Trace;
 import org.enterpriseflowsrepository.api.traces.quarkus.model.*;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.ClientErrorException;
