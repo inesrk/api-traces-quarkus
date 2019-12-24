@@ -2,12 +2,15 @@
 package org.enterpriseflowsrepository.api.traces.quarkus.beans;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
 /**
  * Root Type for Trace
@@ -16,17 +19,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  * 
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "id",
-    "version",
-    "environnement",
-    "message",
-    "route",
-    "business",
-    "origin",
-    "exception",
-    "infrastructure"
-})
+@JsonPropertyOrder({ "id", "version", "environnement", "message", "route", "business", "origin", "exception",
+        "infrastructure", "created", "updated" })
 public class Trace {
 
     /**
@@ -38,48 +32,49 @@ public class Trace {
     private String id;
 
     /**
-     * Version of this format.
-     * (Required)
+     * Version of this format. (Required)
      * 
      */
     @JsonProperty("version")
     @JsonPropertyDescription("Version of this format.")
-    private Integer version;
+    private Long version;
+
     /**
-     * Name of environement.
-     * (Required)
+     * Name of environement. (Required)
      * 
      */
     @JsonProperty("environnement")
     @JsonPropertyDescription("Name of environement.")
     private String environnement;
+    
     /**
      * Root Type for Message
      * <p>
-     * Message description.
-     * (Required)
+     * Message description. (Required)
      * 
      */
     @JsonProperty("message")
     @JsonPropertyDescription("Message description.")
     private Message message;
+    
     /**
      * Root Type for Route
      * <p>
-     * Route used by the message.
-     * (Required)
+     * Route used by the message. (Required)
      * 
      */
     @JsonProperty("route")
     @JsonPropertyDescription("Route used by the message.")
     private Route route;
+    
     /**
      * Business keys in this message.
      * 
      */
     @JsonProperty("business")
     @JsonPropertyDescription("Business keys in this message.")
-    private List<Key> business = new ArrayList<Key>();
+    private List<Key> business = new ArrayList<>();
+    
     /**
      * Root Type for Source
      * <p>
@@ -89,6 +84,7 @@ public class Trace {
     @JsonProperty("origin")
     @JsonPropertyDescription("source for Input or Output.")
     private Source origin;
+    
     /**
      * Root Type for Exception
      * <p>
@@ -98,16 +94,34 @@ public class Trace {
     @JsonProperty("exception")
     @JsonPropertyDescription("Exception occurs during transport.")
     private Exception exception;
+    
     /**
      * Root Type for Infrastructure
      * <p>
-     * Infrastructure where transport is executed.
-     * (Required)
+     * Infrastructure where transport is executed. (Required)
      * 
      */
     @JsonProperty("infrastructure")
     @JsonPropertyDescription("Infrastructure where transport is executed.")
     private Infrastructure infrastructure;
+
+    /**
+     * Date of document creation.
+     * 
+     */
+    @JsonProperty("created")
+    @JsonPropertyDescription("Date of document creation.")
+    @JsonFormat(shape = Shape.STRING)
+    private Date created = new Date();
+
+    /**
+     * Date of document last update.
+     * 
+     */
+    @JsonProperty("updated")
+    @JsonPropertyDescription("Date of document last update.")
+    @JsonFormat(shape = Shape.STRING)
+    private Date updated = new Date();
 
     /**
      * Identifier of this object.
@@ -128,28 +142,25 @@ public class Trace {
     }
 
     /**
-     * Version of this format.
-     * (Required)
+     * Version of this format. (Required)
      * 
      */
     @JsonProperty("version")
-    public Integer getVersion() {
+    public Long getVersion() {
         return version;
     }
 
     /**
-     * Version of this format.
-     * (Required)
+     * Version of this format. (Required)
      * 
      */
     @JsonProperty("version")
-    public void setVersion(Integer version) {
+    public void setVersion(Long version) {
         this.version = version;
     }
 
     /**
-     * Name of environement.
-     * (Required)
+     * Name of environement. (Required)
      * 
      */
     @JsonProperty("environnement")
@@ -158,8 +169,7 @@ public class Trace {
     }
 
     /**
-     * Name of environement.
-     * (Required)
+     * Name of environement. (Required)
      * 
      */
     @JsonProperty("environnement")
@@ -170,8 +180,7 @@ public class Trace {
     /**
      * Root Type for Message
      * <p>
-     * Message description.
-     * (Required)
+     * Message description. (Required)
      * 
      */
     @JsonProperty("message")
@@ -182,8 +191,7 @@ public class Trace {
     /**
      * Root Type for Message
      * <p>
-     * Message description.
-     * (Required)
+     * Message description. (Required)
      * 
      */
     @JsonProperty("message")
@@ -194,8 +202,7 @@ public class Trace {
     /**
      * Root Type for Route
      * <p>
-     * Route used by the message.
-     * (Required)
+     * Route used by the message. (Required)
      * 
      */
     @JsonProperty("route")
@@ -206,8 +213,7 @@ public class Trace {
     /**
      * Root Type for Route
      * <p>
-     * Route used by the message.
-     * (Required)
+     * Route used by the message. (Required)
      * 
      */
     @JsonProperty("route")
@@ -280,8 +286,7 @@ public class Trace {
     /**
      * Root Type for Infrastructure
      * <p>
-     * Infrastructure where transport is executed.
-     * (Required)
+     * Infrastructure where transport is executed. (Required)
      * 
      */
     @JsonProperty("infrastructure")
@@ -292,8 +297,7 @@ public class Trace {
     /**
      * Root Type for Infrastructure
      * <p>
-     * Infrastructure where transport is executed.
-     * (Required)
+     * Infrastructure where transport is executed. (Required)
      * 
      */
     @JsonProperty("infrastructure")
@@ -301,4 +305,39 @@ public class Trace {
         this.infrastructure = infrastructure;
     }
 
+    /**
+     * Date of document creation.
+     * 
+     */
+    @JsonProperty("created")
+    public Date getCreated() {
+        return created;
+    }
+
+    /**
+     * Date of document creation.
+     * 
+     */
+    @JsonProperty("created")
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    /**
+     * Date of document last update.
+     * 
+     */
+    @JsonProperty("updated")
+    public Date getUpdated() {
+        return updated;
+    }
+
+    /**
+     * Date of document last update.
+     * 
+     */
+    @JsonProperty("updated")
+    public void setUpdated(Date updated) {
+        this.updated = updated;
+    }
 }

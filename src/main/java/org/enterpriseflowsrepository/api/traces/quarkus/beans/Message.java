@@ -7,12 +7,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonValue;
-
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
 /**
  * Root Type for Message
@@ -21,15 +22,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * 
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "created",
-    "CorrelationID",
-    "MessageID",
-    "headers",
-    "type",
-    "level",
-    "body"
-})
+@JsonPropertyOrder({ "created", "CorrelationID", "MessageID", "headers", "type", "level", "body" })
 public class Message {
 
     /**
@@ -38,18 +31,18 @@ public class Message {
      */
     @JsonProperty("created")
     @JsonPropertyDescription("Date of message creation.")
+    @JsonFormat(shape = Shape.STRING)
     private Date created;
     /**
-     * ID share during some message.
-     * ID of a travel between Application Source to Application Target.
+     * ID share during some message. ID of a travel between Application Source to
+     * Application Target.
      * 
      */
     @JsonProperty("CorrelationID")
     @JsonPropertyDescription("ID share during some message.\nID of a travel between Application Source to Application Target.")
     private String correlationID;
     /**
-     * ID unique of this message.
-     * (Required)
+     * ID unique of this message. (Required)
      * 
      */
     @JsonProperty("MessageID")
@@ -70,8 +63,7 @@ public class Message {
     @JsonPropertyDescription("Type of this trace.")
     private Message.Type type;
     /**
-     * Level of this trace.
-     * (Required)
+     * Level of this trace. (Required)
      * 
      */
     @JsonProperty("level")
@@ -104,8 +96,8 @@ public class Message {
     }
 
     /**
-     * ID share during some message.
-     * ID of a travel between Application Source to Application Target.
+     * ID share during some message. ID of a travel between Application Source to
+     * Application Target.
      * 
      */
     @JsonProperty("CorrelationID")
@@ -114,8 +106,8 @@ public class Message {
     }
 
     /**
-     * ID share during some message.
-     * ID of a travel between Application Source to Application Target.
+     * ID share during some message. ID of a travel between Application Source to
+     * Application Target.
      * 
      */
     @JsonProperty("CorrelationID")
@@ -124,8 +116,7 @@ public class Message {
     }
 
     /**
-     * ID unique of this message.
-     * (Required)
+     * ID unique of this message. (Required)
      * 
      */
     @JsonProperty("MessageID")
@@ -134,8 +125,7 @@ public class Message {
     }
 
     /**
-     * ID unique of this message.
-     * (Required)
+     * ID unique of this message. (Required)
      * 
      */
     @JsonProperty("MessageID")
@@ -180,8 +170,7 @@ public class Message {
     }
 
     /**
-     * Level of this trace.
-     * (Required)
+     * Level of this trace. (Required)
      * 
      */
     @JsonProperty("level")
@@ -190,8 +179,7 @@ public class Message {
     }
 
     /**
-     * Level of this trace.
-     * (Required)
+     * Level of this trace. (Required)
      * 
      */
     @JsonProperty("level")
@@ -219,15 +207,13 @@ public class Message {
 
     public enum Level {
 
-        fatal("fatal"),
-        error("error"),
-        warn("warn"),
-        info("info");
+        fatal("fatal"), error("error"), warn("warn"), info("info");
+
         private final String value;
         private final static Map<String, Message.Level> CONSTANTS = new HashMap<String, Message.Level>();
 
         static {
-            for (Message.Level c: values()) {
+            for (Message.Level c : values()) {
                 CONSTANTS.put(c.value, c);
             }
         }
@@ -260,14 +246,13 @@ public class Message {
 
     public enum Type {
 
-        error("error"),
-        business("business"),
-        technical("technical");
+        error("error"), business("business"), technical("technical");
+
         private final String value;
         private final static Map<String, Message.Type> CONSTANTS = new HashMap<String, Message.Type>();
 
         static {
-            for (Message.Type c: values()) {
+            for (Message.Type c : values()) {
                 CONSTANTS.put(c.value, c);
             }
         }

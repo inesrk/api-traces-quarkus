@@ -1,7 +1,6 @@
 package org.enterpriseflowsrepository.api.traces.quarkus;
 
 import java.lang.String;
-import java.util.Date;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -17,20 +16,21 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.enterpriseflowsrepository.api.traces.quarkus.beans.Trace;
-
+import org.enterpriseflowsrepository.api.traces.quarkus.utils.DateParameter;
 
 /**
- * A JAX-RS interface.  An implementation of this interface must be provided.
+ * A JAX-RS interface. An implementation of this interface must be provided.
  */
 @Path("/trace")
 public interface TraceResource {
 
   /**
-   * Gets a list of all `Trace` entities.
+   * Gets a list of all 'Trace' entities.
    */
   @GET
   @Produces(MediaType.APPLICATION_JSON)
-  List<Trace> getTraces(@QueryParam("after") Date after, @QueryParam("before") Date before, @QueryParam("keys") List<String> keys);
+  List<Trace> getTraces(@QueryParam("after") DateParameter after, @QueryParam("before") DateParameter before,
+      @QueryParam("keys") List<String> keys);
 
   /**
    * Bulk usage for put some traces.
@@ -40,14 +40,14 @@ public interface TraceResource {
   Response bulkTraces(List<Trace> data);
 
   /**
-   * Creates a new instance of a `Trace`.
+   * Creates a new instance of a 'Trace'.
    */
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   Response createTrace(Trace data);
 
   /**
-   * Gets the details of a single instance of a `Trace`.
+   * Gets the details of a single instance of a 'Trace'.
    */
   @Path("/{traceId}")
   @GET
@@ -55,7 +55,7 @@ public interface TraceResource {
   Trace getTrace(@PathParam("traceId") String traceId);
 
   /**
-   * Updates an existing `Trace`.
+   * Updates an existing 'Trace'.
    */
   @Path("/{traceId}")
   @PUT
@@ -64,7 +64,7 @@ public interface TraceResource {
   Trace updateTrace(@PathParam("traceId") String traceId, Trace data);
 
   /**
-   * Deletes an existing `Trace`.
+   * Deletes an existing 'Trace'.
    */
   @Path("/{traceId}")
   @DELETE

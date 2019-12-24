@@ -6,7 +6,6 @@ import org.enterpriseflowsrepository.api.traces.quarkus.model.*;
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.ClientErrorException;
 
-
 @ApplicationScoped
 public class SourceConverter extends AbstractConverter<SourceModel, Source> {
 
@@ -15,21 +14,21 @@ public class SourceConverter extends AbstractConverter<SourceModel, Source> {
         if (model == null) {
             return null;
         }
-        
+
         Source dto = new Source();
 
         dto.setProtocol(model.getProtocol());
         dto.setSource(model.getSource());
-        
+
         return dto;
     }
 
     @Override
     public Source toDtoWithLinks(SourceModel model) {
         Source dto = toDto(model);
-        
+
         // nothing needed here
-        
+
         return dto;
     }
 
@@ -38,9 +37,9 @@ public class SourceConverter extends AbstractConverter<SourceModel, Source> {
         if (dto == null) {
             return null;
         }
-        
+
         SourceModel model = new SourceModel();
-        
+
         model.setProtocol(dto.getProtocol());
         model.setSource(dto.getSource());
 

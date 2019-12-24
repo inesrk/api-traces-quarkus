@@ -7,10 +7,9 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.ClientErrorException;
 
-
 @ApplicationScoped
 public class MessageConverter extends AbstractConverter<MessageModel, Message> {
-    
+
     @Inject
     KeyConverter keyConverter;
 
@@ -19,7 +18,7 @@ public class MessageConverter extends AbstractConverter<MessageModel, Message> {
         if (model == null) {
             return null;
         }
-        
+
         Message dto = new Message();
 
         dto.setBody(model.getBody());
@@ -29,14 +28,14 @@ public class MessageConverter extends AbstractConverter<MessageModel, Message> {
         dto.setLevel(Message.Level.fromValue(model.getLevel().value()));
         dto.setMessageID(model.getMessageID());
         dto.setType(Message.Type.fromValue(model.getType().value()));
-        
+
         return dto;
     }
-    
+
     @Override
     public Message toDtoWithLinks(MessageModel model) {
         Message dto = toDto(model);
-        
+
         // nothing needed here
 
         return dto;
@@ -47,9 +46,9 @@ public class MessageConverter extends AbstractConverter<MessageModel, Message> {
         if (dto == null) {
             return null;
         }
-        
+
         MessageModel model = new MessageModel();
-        
+
         model.setBody(dto.getBody());
         model.setCorrelationID(dto.getCorrelationID());
         model.setCreated(dto.getCreated());

@@ -6,7 +6,6 @@ import org.enterpriseflowsrepository.api.traces.quarkus.model.*;
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.ClientErrorException;
 
-
 @ApplicationScoped
 public class InfrastructureConverter extends AbstractConverter<InfrastructureModel, Infrastructure> {
 
@@ -15,20 +14,20 @@ public class InfrastructureConverter extends AbstractConverter<InfrastructureMod
         if (model == null) {
             return null;
         }
-        
+
         Infrastructure dto = new Infrastructure();
 
         dto.setHostname(model.getHostname());
-        
+
         return dto;
-    } 
-    
+    }
+
     @Override
     public Infrastructure toDtoWithLinks(InfrastructureModel model) {
         Infrastructure dto = toDto(model);
-        
+
         // nothing needed here
-        
+
         return dto;
     }
 
@@ -37,9 +36,9 @@ public class InfrastructureConverter extends AbstractConverter<InfrastructureMod
         if (dto == null) {
             return null;
         }
-        
+
         InfrastructureModel model = new InfrastructureModel();
-        
+
         model.setHostname(dto.getHostname());
 
         return model;

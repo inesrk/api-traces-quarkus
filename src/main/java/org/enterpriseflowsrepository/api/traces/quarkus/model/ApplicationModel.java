@@ -6,13 +6,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
-
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApplicationModel {
 
     @JsonProperty("informationSystem")
     private String informationSystem;
-    
+
     /**
      * Name of application.
      * 
@@ -20,10 +19,10 @@ public class ApplicationModel {
     @JsonProperty("application")
     @JsonPropertyDescription("Name of application.")
     private String application;
-    
+
     @JsonProperty("hostname")
     private String hostname;
-    
+
     /**
      * Creation date of send.
      * 

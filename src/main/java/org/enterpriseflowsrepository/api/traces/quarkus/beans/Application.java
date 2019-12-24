@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-
 /**
  * Root Type for Application
  * <p>
@@ -15,12 +14,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  * 
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "informationSystem",
-    "application",
-    "hostname",
-    "created"
-})
+@JsonPropertyOrder({ "informationSystem", "application", "hostname", "created" })
 public class Application {
 
     @JsonProperty("informationSystem")

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
+import org.enterpriseflowsrepository.api.traces.quarkus.beans.Source;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RouteModel {
@@ -24,7 +25,7 @@ public class RouteModel {
     @JsonProperty("version")
     @JsonPropertyDescription("Version of route.")
     private String version;
-    
+
     /**
      * ID of route.
      * 
@@ -32,7 +33,7 @@ public class RouteModel {
     @JsonProperty("id")
     @JsonPropertyDescription("ID of route.")
     private String id;
-    
+
     /**
      * Step DURIG thie route.
      * 
@@ -40,7 +41,7 @@ public class RouteModel {
     @JsonProperty("step")
     @JsonPropertyDescription("Step DURIG thie route.")
     private String step;
-    
+
     /**
      * Textual description of route.
      * 
@@ -48,7 +49,7 @@ public class RouteModel {
     @JsonProperty("description")
     @JsonPropertyDescription("Textual description of route.")
     private String description;
-    
+
     /**
      * Root Type for Source
      * <p>
@@ -57,8 +58,8 @@ public class RouteModel {
      */
     @JsonProperty("input")
     @JsonPropertyDescription("source for Input or Output.")
-    private org.enterpriseflowsrepository.api.traces.quarkus.beans.Source input;
-    
+    private Source input;
+
     /**
      * Root Type for Source
      * <p>
@@ -67,7 +68,7 @@ public class RouteModel {
      */
     @JsonProperty("output")
     @JsonPropertyDescription("source for Input or Output.")
-    private org.enterpriseflowsrepository.api.traces.quarkus.beans.Source output;
+    private Source output;
 
     /**
      * Name of route.

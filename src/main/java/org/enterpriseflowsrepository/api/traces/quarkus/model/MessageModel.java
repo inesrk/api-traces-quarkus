@@ -7,11 +7,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 import com.fasterxml.jackson.annotation.JsonValue;
-
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class MessageModel {
@@ -22,26 +23,26 @@ public class MessageModel {
      */
     @JsonProperty("created")
     @JsonPropertyDescription("Date of message creation.")
+    @JsonFormat(shape = Shape.STRING)
     private Date created;
 
     /**
-     * ID share during some message.
-     * ID of a travel between Application Source to Application Target.
+     * ID share during some message. ID of a travel between Application Source to
+     * Application Target.
      * 
      */
     @JsonProperty("CorrelationID")
     @JsonPropertyDescription("ID share during some message.\nID of a travel between Application Source to Application Target.")
     private String correlationID;
-    
+
     /**
-     * ID unique of this message.
-     * (Required)
+     * ID unique of this message. (Required)
      * 
      */
     @JsonProperty("MessageID")
     @JsonPropertyDescription("ID unique of this message.")
     private String messageID;
-    
+
     /**
      * Headers of this message.
      * 
@@ -49,7 +50,7 @@ public class MessageModel {
     @JsonProperty("headers")
     @JsonPropertyDescription("Headers of this message.")
     private List<KeyModel> headers = new ArrayList<KeyModel>();
-    
+
     /**
      * Type of this trace.
      * 
@@ -57,16 +58,15 @@ public class MessageModel {
     @JsonProperty("type")
     @JsonPropertyDescription("Type of this trace.")
     private MessageModel.Type type;
-    
+
     /**
-     * Level of this trace.
-     * (Required)
+     * Level of this trace. (Required)
      * 
      */
     @JsonProperty("level")
     @JsonPropertyDescription("Level of this trace.")
     private MessageModel.Level level;
-    
+
     /**
      * Body of message.
      * 
@@ -94,8 +94,8 @@ public class MessageModel {
     }
 
     /**
-     * ID share during some message.
-     * ID of a travel between Application Source to Application Target.
+     * ID share during some message. ID of a travel between Application Source to
+     * Application Target.
      * 
      */
     @JsonProperty("CorrelationID")
@@ -104,8 +104,8 @@ public class MessageModel {
     }
 
     /**
-     * ID share during some message.
-     * ID of a travel between Application Source to Application Target.
+     * ID share during some message. ID of a travel between Application Source to
+     * Application Target.
      * 
      */
     @JsonProperty("CorrelationID")
@@ -114,8 +114,7 @@ public class MessageModel {
     }
 
     /**
-     * ID unique of this message.
-     * (Required)
+     * ID unique of this message. (Required)
      * 
      */
     @JsonProperty("MessageID")
@@ -124,8 +123,7 @@ public class MessageModel {
     }
 
     /**
-     * ID unique of this message.
-     * (Required)
+     * ID unique of this message. (Required)
      * 
      */
     @JsonProperty("MessageID")
@@ -170,8 +168,7 @@ public class MessageModel {
     }
 
     /**
-     * Level of this trace.
-     * (Required)
+     * Level of this trace. (Required)
      * 
      */
     @JsonProperty("level")
@@ -180,8 +177,7 @@ public class MessageModel {
     }
 
     /**
-     * Level of this trace.
-     * (Required)
+     * Level of this trace. (Required)
      * 
      */
     @JsonProperty("level")
@@ -208,16 +204,13 @@ public class MessageModel {
     }
 
     public enum Level {
-        fatal("fatal"),
-        error("error"),
-        warn("warn"),
-        info("info");
+        fatal("fatal"), error("error"), warn("warn"), info("info");
 
         private final String value;
         private final static Map<String, MessageModel.Level> CONSTANTS = new HashMap<String, MessageModel.Level>();
 
         static {
-            for (MessageModel.Level c: values()) {
+            for (MessageModel.Level c : values()) {
                 CONSTANTS.put(c.value, c);
             }
         }
@@ -248,15 +241,13 @@ public class MessageModel {
     }
 
     public enum Type {
-        error("error"),
-        business("business"),
-        technical("technical");
+        error("error"), business("business"), technical("technical");
 
         private final String value;
         private final static Map<String, MessageModel.Type> CONSTANTS = new HashMap<String, MessageModel.Type>();
 
         static {
-            for (MessageModel.Type c: values()) {
+            for (MessageModel.Type c : values()) {
                 CONSTANTS.put(c.value, c);
             }
         }

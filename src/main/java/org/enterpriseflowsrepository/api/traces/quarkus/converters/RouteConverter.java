@@ -6,7 +6,6 @@ import org.enterpriseflowsrepository.api.traces.quarkus.model.*;
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.ClientErrorException;
 
-
 @ApplicationScoped
 public class RouteConverter extends AbstractConverter<RouteModel, Route> {
 
@@ -15,7 +14,7 @@ public class RouteConverter extends AbstractConverter<RouteModel, Route> {
         if (model == null) {
             return null;
         }
-        
+
         Route dto = new Route();
 
         dto.setDescription(model.getDescription());
@@ -25,16 +24,16 @@ public class RouteConverter extends AbstractConverter<RouteModel, Route> {
         dto.setOutput(model.getOutput());
         dto.setStep(model.getStep());
         dto.setVersion(model.getVersion());
-        
+
         return dto;
     }
 
     @Override
     public Route toDtoWithLinks(RouteModel model) {
         Route dto = toDto(model);
-        
+
         // nothing needed here
-        
+
         return dto;
     }
 
@@ -43,7 +42,7 @@ public class RouteConverter extends AbstractConverter<RouteModel, Route> {
         if (dto == null) {
             return null;
         }
-        
+
         RouteModel model = new RouteModel();
 
         model.setDescription(dto.getDescription());

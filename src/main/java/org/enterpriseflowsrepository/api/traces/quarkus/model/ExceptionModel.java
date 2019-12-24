@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
-
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ExceptionModel {
 
@@ -24,7 +23,7 @@ public class ExceptionModel {
     @JsonProperty("class")
     @JsonPropertyDescription("Class name.")
     private String _class;
-    
+
     /**
      * A short text details.
      * 
@@ -32,7 +31,7 @@ public class ExceptionModel {
     @JsonProperty("detail")
     @JsonPropertyDescription("A short text details.")
     private String detail;
-    
+
     /**
      * complete stacktrace of this exception.
      * 

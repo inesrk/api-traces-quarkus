@@ -9,22 +9,11 @@ import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
 import org.enterpriseflowsrepository.api.traces.quarkus.clients.elasticsearch.AbstractDocument;
 
-
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class TraceModel extends AbstractDocument {
 
     /**
-     * Version of this format.
-     * (Required)
-     * 
-     */
-    @JsonProperty("version")
-    @JsonPropertyDescription("Version of this format.")
-    private Integer version;
-
-    /**
-     * Name of environement.
-     * (Required)
+     * Name of environement. (Required)
      * 
      */
     @JsonProperty("environnement")
@@ -32,30 +21,28 @@ public class TraceModel extends AbstractDocument {
     private String environnement;
 
     /**
-     * Message description.
-     * (Required)
+     * Message description. (Required)
      * 
      */
     @JsonProperty("message")
     @JsonPropertyDescription("Message description.")
     private MessageModel message;
-    
+
     /**
-     * Route used by the message.
-     * (Required)
+     * Route used by the message. (Required)
      * 
      */
     @JsonProperty("route")
     @JsonPropertyDescription("Route used by the message.")
     private RouteModel route;
-    
+
     /**
      * Business keys in this message.
      * 
      */
     @JsonProperty("business")
     @JsonPropertyDescription("Business keys in this message.")
-    private List<KeyModel> business = new ArrayList<KeyModel>();
+    private List<KeyModel> business = new ArrayList<>();
 
     /**
      * Source for Input or Output.
@@ -74,8 +61,7 @@ public class TraceModel extends AbstractDocument {
     private ExceptionModel exception;
 
     /**
-     * Infrastructure where transport is executed.
-     * (Required)
+     * Infrastructure where transport is executed. (Required)
      * 
      */
     @JsonProperty("infrastructure")
@@ -83,28 +69,7 @@ public class TraceModel extends AbstractDocument {
     private InfrastructureModel infrastructure;
 
     /**
-     * Version of this format.
-     * (Required)
-     * 
-     */
-    @JsonProperty("version")
-    public Integer getVersion() {
-        return version;
-    }
-
-    /**
-     * Version of this format.
-     * (Required)
-     * 
-     */
-    @JsonProperty("version")
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
-
-    /**
-     * Name of environement.
-     * (Required)
+     * Name of environement. (Required)
      * 
      */
     @JsonProperty("environnement")
@@ -113,8 +78,7 @@ public class TraceModel extends AbstractDocument {
     }
 
     /**
-     * Name of environement.
-     * (Required)
+     * Name of environement. (Required)
      * 
      */
     @JsonProperty("environnement")
@@ -123,8 +87,7 @@ public class TraceModel extends AbstractDocument {
     }
 
     /**
-     * Message description.
-     * (Required)
+     * Message description. (Required)
      * 
      */
     @JsonProperty("message")
@@ -133,8 +96,7 @@ public class TraceModel extends AbstractDocument {
     }
 
     /**
-     * Message description.
-     * (Required)
+     * Message description. (Required)
      * 
      */
     @JsonProperty("message")
@@ -143,8 +105,7 @@ public class TraceModel extends AbstractDocument {
     }
 
     /**
-     * Route used by the message.
-     * (Required)
+     * Route used by the message. (Required)
      * 
      */
     @JsonProperty("route")
@@ -153,8 +114,7 @@ public class TraceModel extends AbstractDocument {
     }
 
     /**
-     * Route used by the message.
-     * (Required)
+     * Route used by the message. (Required)
      * 
      */
     @JsonProperty("route")
@@ -217,8 +177,7 @@ public class TraceModel extends AbstractDocument {
     }
 
     /**
-     * Infrastructure where transport is executed.
-     * (Required)
+     * Infrastructure where transport is executed. (Required)
      * 
      */
     @JsonProperty("infrastructure")
@@ -227,8 +186,7 @@ public class TraceModel extends AbstractDocument {
     }
 
     /**
-     * Infrastructure where transport is executed.
-     * (Required)
+     * Infrastructure where transport is executed. (Required)
      * 
      */
     @JsonProperty("infrastructure")

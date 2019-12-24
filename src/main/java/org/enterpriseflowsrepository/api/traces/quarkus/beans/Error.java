@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-
 /**
  * Root Type for Error
  * <p>
@@ -14,12 +13,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
  * 
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({
-    "code",
-    "description",
-    "details",
-    "origin"
-})
+@JsonPropertyOrder({ "code", "description", "details", "origin" })
 public class Error {
 
     /**
