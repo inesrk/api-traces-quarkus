@@ -12,6 +12,8 @@ import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+
 /**
  * Root Type for Trace
  * <p>
@@ -19,8 +21,8 @@ import com.fasterxml.jackson.annotation.JsonFormat.Shape;
  * 
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@JsonPropertyOrder({ "id", "version", "environnement", "message", "route", "business", "origin", "exception",
-        "infrastructure", "created" })
+@JsonPropertyOrder({ "id", "version", "environnement", "message", "route", "business", "origin", "exception", "infrastructure", "created" })
+@Schema(name="Trace", description="POJO that represents a trace.")
 public class Trace {
 
     /**

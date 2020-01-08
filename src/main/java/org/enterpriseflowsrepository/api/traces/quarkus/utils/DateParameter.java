@@ -21,16 +21,16 @@ public class DateParameter implements Serializable {
         format.setTimeZone(TimeZone.getTimeZone("UTC"));
     }
 
-    private DateParameter(String dateString) {
+    public DateParameter(Date date) {
+        this.date = date;
+    }
+
+    public static DateParameter valueOf(String dateString) {
         try {
-            this.date = format.parse(dateString);
+            return new DateParameter(format.parse(dateString));
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    private DateParameter(Date date) {
-        this.date = date;
     }
 
     public Date getDate() {
@@ -41,11 +41,8 @@ public class DateParameter implements Serializable {
         this.date = date;
     }
 
-    public static DateParameter valueOf(String dateString) {
-        try {
-            return new DateParameter(format.parse(dateString));
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
+    @Override
+    public String toString() {
+        return format.format(date);
     }
 }
