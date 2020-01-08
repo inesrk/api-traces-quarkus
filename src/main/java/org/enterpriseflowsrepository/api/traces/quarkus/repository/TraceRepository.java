@@ -88,7 +88,7 @@ public class TraceRepository {
     public List<TraceModel> search(Date after, Date before, List<String> keys) {
         QueryBuilder query = (QueryBuilder) QueryBuilders.boolQuery()
                 .filter(QueryBuilders.termsQuery("business.name.keyword", keys))
-                .filter(QueryBuilders.rangeQuery("updated").gte(after).lte(before));
+                .filter(QueryBuilders.rangeQuery("created").gte(after).lte(before));
         SortBuilder<FieldSortBuilder> sort = new FieldSortBuilder("created").order(SortOrder.ASC);
 
         List<TraceModel> models = null;
@@ -120,20 +120,5 @@ public class TraceRepository {
         }
 
         LOG.fine(String.format("Created document within index '%s' with id '%s'", elasticsearchIndex, res.getId()));
-    }
-
-    public TraceModel getById(String id) {
-        TraceModel model = null;
-        try {
-            model = (TraceModel) elasticClient.findAsync(elasticsearchIndex, id, TraceModel.class, false).get();
-        } catch (ElasticsearchStatusException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException | ExecutionException e) {
-            throw new RuntimeException(e);
-        }
-
-        LOG.fine(String.format("Get document within index '%s' with id '%s'", elasticsearchIndex, id));
-
-        return model;
     }
 }

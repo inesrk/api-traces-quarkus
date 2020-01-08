@@ -10,7 +10,6 @@ import org.enterpriseflowsrepository.api.traces.quarkus.utils.DateParameter;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.Response;
 
 import org.enterpriseflowsrepository.api.traces.quarkus.TraceResource;
@@ -33,28 +32,7 @@ public class TraceService extends AbstractService implements TraceResource {
         traceRepo.create(traceConverter.toModel(data));
         return Response.status(Response.Status.CREATED).build();
     }
-
-    @Override
-    public Trace getTrace(String name) {
-        TraceModel model = traceRepo.getById(name);
-
-        if (model == null) {
-            throw new NotFoundException();
-        }
-
-        return traceConverter.toDto(model);
-    }
-
-    @Override
-    public Trace updateTrace(String name, Trace data) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public Response deleteTrace(String name) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
+    
     @Override
     public List<Trace> getTraces(DateParameter after, DateParameter before, List<String> keys) {
         List<TraceModel> models = traceRepo.search(after.getDate(), before.getDate(), keys);

@@ -30,15 +30,6 @@ public class AbstractDocument {
     private Date created;
 
     /**
-     * Date of document last update.
-     * 
-     */
-    @JsonProperty("updated")
-    @JsonPropertyDescription("Date of document last update.")
-    @JsonFormat(shape = Shape.STRING)
-    private Date updated;
-
-    /**
      * Unique identifier of the document.
      * 
      */
@@ -86,23 +77,5 @@ public class AbstractDocument {
     @JsonProperty("created")
     public void setCreated(Date created) {
         this.created = created;
-    }
-
-    /**
-     * Date of document last update.
-     * 
-     */
-    @JsonProperty("updated")
-    public Date getUpdated() {
-        return updated;
-    }
-
-    /**
-     * Date of document last update.
-     * 
-     */
-    @JsonProperty("updated")
-    public void setUpdated(Date updated) {
-        this.updated = updated;
     }
 }

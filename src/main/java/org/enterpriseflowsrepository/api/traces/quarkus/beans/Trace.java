@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonFormat.Shape;
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "id", "version", "environnement", "message", "route", "business", "origin", "exception",
-        "infrastructure", "created", "updated" })
+        "infrastructure", "created" })
 public class Trace {
 
     /**
@@ -113,15 +113,6 @@ public class Trace {
     @JsonPropertyDescription("Date of document creation.")
     @JsonFormat(shape = Shape.STRING)
     private Date created = new Date();
-
-    /**
-     * Date of document last update.
-     * 
-     */
-    @JsonProperty("updated")
-    @JsonPropertyDescription("Date of document last update.")
-    @JsonFormat(shape = Shape.STRING)
-    private Date updated = new Date();
 
     /**
      * Identifier of this object.
@@ -321,23 +312,5 @@ public class Trace {
     @JsonProperty("created")
     public void setCreated(Date created) {
         this.created = created;
-    }
-
-    /**
-     * Date of document last update.
-     * 
-     */
-    @JsonProperty("updated")
-    public Date getUpdated() {
-        return updated;
-    }
-
-    /**
-     * Date of document last update.
-     * 
-     */
-    @JsonProperty("updated")
-    public void setUpdated(Date updated) {
-        this.updated = updated;
     }
 }

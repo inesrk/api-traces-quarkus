@@ -45,28 +45,4 @@ public interface TraceResource {
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   Response createTrace(Trace data);
-
-  /**
-   * Gets the details of a single instance of a 'Trace'.
-   */
-  @Path("/{traceId}")
-  @GET
-  @Produces(MediaType.APPLICATION_JSON)
-  Trace getTrace(@PathParam("traceId") String traceId);
-
-  /**
-   * Updates an existing 'Trace'.
-   */
-  @Path("/{traceId}")
-  @PUT
-  @Consumes(MediaType.APPLICATION_JSON)
-  @Produces(MediaType.APPLICATION_JSON)
-  Trace updateTrace(@PathParam("traceId") String traceId, Trace data);
-
-  /**
-   * Deletes an existing 'Trace'.
-   */
-  @Path("/{traceId}")
-  @DELETE
-  Response deleteTrace(@PathParam("traceId") String traceId);
 }

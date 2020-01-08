@@ -46,7 +46,6 @@ public class TraceConverter extends AbstractConverter<TraceModel, Trace> {
         dto.setVersion(model.getVersion());
         dto.setId(model.getId());
         dto.setCreated(model.getCreated());
-        dto.setUpdated(model.getUpdated());
 
         return dto;
     }
@@ -77,7 +76,6 @@ public class TraceConverter extends AbstractConverter<TraceModel, Trace> {
         model.setOrigin(sourceConverter.toModel(dto.getOrigin()));
         model.setRoute(routeConverter.toModel(dto.getRoute()));
         model.setCreated(dto.getCreated());
-        model.setUpdated(dto.getUpdated());
 
         return model;
     }
