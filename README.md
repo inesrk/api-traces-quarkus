@@ -56,15 +56,24 @@ Enterprise Flows Repisitory is straightforward: [a container image is published 
 
 ### Development environement
 
-Start the container to your own environement (50m RAM and 0.05 CPU):
+Start the container to your own environement:
 
 ```bash
-docker run --memory="50m" --cpus=".05" -p 8080:8080 enterpriseflowsrepository/api-traces-quarkus
+# Start first the database
+podman run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" elastic/elasticsearch:7.5.1
+
+# Start the compilation Java dev server
+./mvnw compile quarkus:dev
 ```
 
 ### Production environement
 
 We advise the usage of Kubernetes as the orchestrator of the application. Thanks to its stateless behavior, you can easily integrate it. See the k8s deployement files included for more info about it (path `src/main/k8s`).
+
+```bash
+# You can also start the application container like this
+podman run -p 8080:8080 --memory="50m" --cpus=".05" enterpriseflowsrepository/api-traces-quarkus
+```
 
 ## Built With
 
