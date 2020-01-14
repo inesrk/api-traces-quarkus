@@ -10,7 +10,6 @@ public class ExceptionModel {
 
     /**
      * Unique code for this exception.
-     * 
      */
     @JsonProperty("code")
     @JsonPropertyDescription("Unique code for this exception.")
@@ -18,7 +17,6 @@ public class ExceptionModel {
 
     /**
      * Class name.
-     * 
      */
     @JsonProperty("class")
     @JsonPropertyDescription("Class name.")
@@ -26,7 +24,6 @@ public class ExceptionModel {
 
     /**
      * A short text details.
-     * 
      */
     @JsonProperty("detail")
     @JsonPropertyDescription("A short text details.")
@@ -34,7 +31,6 @@ public class ExceptionModel {
 
     /**
      * complete stacktrace of this exception.
-     * 
      */
     @JsonProperty("stacktrace")
     @JsonPropertyDescription("complete stacktrace of this exception.")
@@ -42,7 +38,6 @@ public class ExceptionModel {
 
     /**
      * Unique code for this exception.
-     * 
      */
     @JsonProperty("code")
     public String getCode() {
@@ -51,7 +46,6 @@ public class ExceptionModel {
 
     /**
      * Unique code for this exception.
-     * 
      */
     @JsonProperty("code")
     public void setCode(String code) {
@@ -60,7 +54,6 @@ public class ExceptionModel {
 
     /**
      * Class name.
-     * 
      */
     @JsonProperty("class")
     public String getClass_() {
@@ -69,7 +62,6 @@ public class ExceptionModel {
 
     /**
      * Class name.
-     * 
      */
     @JsonProperty("class")
     public void setClass_(String _class) {
@@ -78,7 +70,6 @@ public class ExceptionModel {
 
     /**
      * A short text details.
-     * 
      */
     @JsonProperty("detail")
     public String getDetail() {
@@ -87,7 +78,6 @@ public class ExceptionModel {
 
     /**
      * A short text details.
-     * 
      */
     @JsonProperty("detail")
     public void setDetail(String detail) {
@@ -96,7 +86,6 @@ public class ExceptionModel {
 
     /**
      * complete stacktrace of this exception.
-     * 
      */
     @JsonProperty("stacktrace")
     public String getStacktrace() {
@@ -105,7 +94,6 @@ public class ExceptionModel {
 
     /**
      * complete stacktrace of this exception.
-     * 
      */
     @JsonProperty("stacktrace")
     public void setStacktrace(String stacktrace) {

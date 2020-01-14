@@ -3,6 +3,7 @@ package org.enterpriseflowsrepository.api.traces.quarkus.model;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
@@ -14,7 +15,6 @@ public class TraceModel extends AbstractDocument {
 
     /**
      * Name of environement. (Required)
-     * 
      */
     @JsonProperty("environnement")
     @JsonPropertyDescription("Name of environement.")
@@ -22,7 +22,6 @@ public class TraceModel extends AbstractDocument {
 
     /**
      * Message description. (Required)
-     * 
      */
     @JsonProperty("message")
     @JsonPropertyDescription("Message description.")
@@ -30,7 +29,6 @@ public class TraceModel extends AbstractDocument {
 
     /**
      * Route used by the message. (Required)
-     * 
      */
     @JsonProperty("route")
     @JsonPropertyDescription("Route used by the message.")
@@ -38,7 +36,6 @@ public class TraceModel extends AbstractDocument {
 
     /**
      * Business keys in this message.
-     * 
      */
     @JsonProperty("business")
     @JsonPropertyDescription("Business keys in this message.")
@@ -46,7 +43,6 @@ public class TraceModel extends AbstractDocument {
 
     /**
      * Source for Input or Output.
-     * 
      */
     @JsonProperty("origin")
     @JsonPropertyDescription("source for Input or Output.")
@@ -54,7 +50,6 @@ public class TraceModel extends AbstractDocument {
 
     /**
      * Exception occurs during transport.
-     * 
      */
     @JsonProperty("exception")
     @JsonPropertyDescription("Exception occurs during transport.")
@@ -62,7 +57,6 @@ public class TraceModel extends AbstractDocument {
 
     /**
      * Infrastructure where transport is executed. (Required)
-     * 
      */
     @JsonProperty("infrastructure")
     @JsonPropertyDescription("Infrastructure where transport is executed.")
@@ -70,7 +64,6 @@ public class TraceModel extends AbstractDocument {
 
     /**
      * Name of environement. (Required)
-     * 
      */
     @JsonProperty("environnement")
     public String getEnvironnement() {
@@ -79,7 +72,6 @@ public class TraceModel extends AbstractDocument {
 
     /**
      * Name of environement. (Required)
-     * 
      */
     @JsonProperty("environnement")
     public void setEnvironnement(String environnement) {
@@ -88,7 +80,6 @@ public class TraceModel extends AbstractDocument {
 
     /**
      * Message description. (Required)
-     * 
      */
     @JsonProperty("message")
     public MessageModel getMessage() {
@@ -97,7 +88,6 @@ public class TraceModel extends AbstractDocument {
 
     /**
      * Message description. (Required)
-     * 
      */
     @JsonProperty("message")
     public void setMessage(MessageModel message) {
@@ -106,7 +96,6 @@ public class TraceModel extends AbstractDocument {
 
     /**
      * Route used by the message. (Required)
-     * 
      */
     @JsonProperty("route")
     public RouteModel getRoute() {
@@ -115,7 +104,6 @@ public class TraceModel extends AbstractDocument {
 
     /**
      * Route used by the message. (Required)
-     * 
      */
     @JsonProperty("route")
     public void setRoute(RouteModel route) {
@@ -124,7 +112,6 @@ public class TraceModel extends AbstractDocument {
 
     /**
      * Business keys in this message.
-     * 
      */
     @JsonProperty("business")
     public List<KeyModel> getBusiness() {
@@ -133,7 +120,6 @@ public class TraceModel extends AbstractDocument {
 
     /**
      * Business keys in this message.
-     * 
      */
     @JsonProperty("business")
     public void setBusiness(List<KeyModel> business) {
@@ -142,7 +128,6 @@ public class TraceModel extends AbstractDocument {
 
     /**
      * Source for Input or Output.
-     * 
      */
     @JsonProperty("origin")
     public SourceModel getOrigin() {
@@ -151,7 +136,6 @@ public class TraceModel extends AbstractDocument {
 
     /**
      * Source for Input or Output.
-     * 
      */
     @JsonProperty("origin")
     public void setOrigin(SourceModel origin) {
@@ -160,7 +144,6 @@ public class TraceModel extends AbstractDocument {
 
     /**
      * Exception occurs during transport.
-     * 
      */
     @JsonProperty("exception")
     public ExceptionModel getException() {
@@ -169,7 +152,6 @@ public class TraceModel extends AbstractDocument {
 
     /**
      * Exception occurs during transport.
-     * 
      */
     @JsonProperty("exception")
     public void setException(ExceptionModel exception) {
@@ -178,7 +160,6 @@ public class TraceModel extends AbstractDocument {
 
     /**
      * Infrastructure where transport is executed. (Required)
-     * 
      */
     @JsonProperty("infrastructure")
     public InfrastructureModel getInfrastructure() {
@@ -187,7 +168,6 @@ public class TraceModel extends AbstractDocument {
 
     /**
      * Infrastructure where transport is executed. (Required)
-     * 
      */
     @JsonProperty("infrastructure")
     public void setInfrastructure(InfrastructureModel infrastructure) {

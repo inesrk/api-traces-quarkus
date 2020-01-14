@@ -6,11 +6,11 @@ import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
 
@@ -27,7 +27,6 @@ public class Trace {
 
     /**
      * Identifier of this object.
-     * 
      */
     @JsonProperty("id")
     @JsonPropertyDescription("Identifier of this object.")
@@ -35,7 +34,6 @@ public class Trace {
 
     /**
      * Version of this format. (Required)
-     * 
      */
     @JsonProperty("version")
     @JsonPropertyDescription("Version of this format.")
@@ -43,7 +41,6 @@ public class Trace {
 
     /**
      * Name of environement. (Required)
-     * 
      */
     @JsonProperty("environnement")
     @JsonPropertyDescription("Name of environement.")
@@ -53,7 +50,6 @@ public class Trace {
      * Root Type for Message
      * <p>
      * Message description. (Required)
-     * 
      */
     @JsonProperty("message")
     @JsonPropertyDescription("Message description.")
@@ -63,7 +59,6 @@ public class Trace {
      * Root Type for Route
      * <p>
      * Route used by the message. (Required)
-     * 
      */
     @JsonProperty("route")
     @JsonPropertyDescription("Route used by the message.")
@@ -71,7 +66,6 @@ public class Trace {
     
     /**
      * Business keys in this message.
-     * 
      */
     @JsonProperty("business")
     @JsonPropertyDescription("Business keys in this message.")
@@ -81,7 +75,6 @@ public class Trace {
      * Root Type for Source
      * <p>
      * source for Input or Output.
-     * 
      */
     @JsonProperty("origin")
     @JsonPropertyDescription("source for Input or Output.")
@@ -91,7 +84,6 @@ public class Trace {
      * Root Type for Exception
      * <p>
      * Exception occurs during transport.
-     * 
      */
     @JsonProperty("exception")
     @JsonPropertyDescription("Exception occurs during transport.")
@@ -101,7 +93,6 @@ public class Trace {
      * Root Type for Infrastructure
      * <p>
      * Infrastructure where transport is executed. (Required)
-     * 
      */
     @JsonProperty("infrastructure")
     @JsonPropertyDescription("Infrastructure where transport is executed.")
@@ -109,7 +100,6 @@ public class Trace {
 
     /**
      * Date of document creation.
-     * 
      */
     @JsonProperty("created")
     @JsonPropertyDescription("Date of document creation.")
@@ -117,8 +107,41 @@ public class Trace {
     private Date created = new Date();
 
     /**
-     * Identifier of this object.
+     * Standard constructor.
+     */
+    public Trace() {
+        // nothing here
+    }
+    
+    /**
+     * Internal constructor, to be used in tests.
      * 
+     * @param id
+     * @param version
+     * @param environnement
+     * @param message
+     * @param route
+     * @param business
+     * @param origin
+     * @param exception
+     * @param infrastructure
+     * @param created
+     */
+    Trace(String id, Long version, String environnement, Message message, Route route, List<Key> business, Source origin, Exception exception, Infrastructure infrastructure, Date created) {
+        this.id = id;
+        this.version = version;
+        this.environnement = environnement;
+        this.message = message;
+        this.route = route;
+        this.business = business;
+        this.origin = origin;
+        this.exception = exception;
+        this.infrastructure = infrastructure;
+        this.created = created;
+    }
+
+    /**
+     * Identifier of this object.
      */
     @JsonProperty("id")
     public String getId() {
@@ -127,7 +150,6 @@ public class Trace {
 
     /**
      * Identifier of this object.
-     * 
      */
     @JsonProperty("id")
     public void setId(String id) {
@@ -136,7 +158,6 @@ public class Trace {
 
     /**
      * Version of this format. (Required)
-     * 
      */
     @JsonProperty("version")
     public Long getVersion() {
@@ -145,7 +166,6 @@ public class Trace {
 
     /**
      * Version of this format. (Required)
-     * 
      */
     @JsonProperty("version")
     public void setVersion(Long version) {
@@ -154,7 +174,6 @@ public class Trace {
 
     /**
      * Name of environement. (Required)
-     * 
      */
     @JsonProperty("environnement")
     public String getEnvironnement() {
@@ -163,7 +182,6 @@ public class Trace {
 
     /**
      * Name of environement. (Required)
-     * 
      */
     @JsonProperty("environnement")
     public void setEnvironnement(String environnement) {
@@ -174,7 +192,6 @@ public class Trace {
      * Root Type for Message
      * <p>
      * Message description. (Required)
-     * 
      */
     @JsonProperty("message")
     public Message getMessage() {
@@ -185,7 +202,6 @@ public class Trace {
      * Root Type for Message
      * <p>
      * Message description. (Required)
-     * 
      */
     @JsonProperty("message")
     public void setMessage(Message message) {
@@ -196,7 +212,6 @@ public class Trace {
      * Root Type for Route
      * <p>
      * Route used by the message. (Required)
-     * 
      */
     @JsonProperty("route")
     public Route getRoute() {
@@ -207,7 +222,6 @@ public class Trace {
      * Root Type for Route
      * <p>
      * Route used by the message. (Required)
-     * 
      */
     @JsonProperty("route")
     public void setRoute(Route route) {
@@ -216,7 +230,6 @@ public class Trace {
 
     /**
      * Business keys in this message.
-     * 
      */
     @JsonProperty("business")
     public List<Key> getBusiness() {
@@ -225,7 +238,6 @@ public class Trace {
 
     /**
      * Business keys in this message.
-     * 
      */
     @JsonProperty("business")
     public void setBusiness(List<Key> business) {
@@ -236,7 +248,6 @@ public class Trace {
      * Root Type for Source
      * <p>
      * source for Input or Output.
-     * 
      */
     @JsonProperty("origin")
     public Source getOrigin() {
@@ -247,7 +258,6 @@ public class Trace {
      * Root Type for Source
      * <p>
      * source for Input or Output.
-     * 
      */
     @JsonProperty("origin")
     public void setOrigin(Source origin) {
@@ -258,7 +268,6 @@ public class Trace {
      * Root Type for Exception
      * <p>
      * Exception occurs during transport.
-     * 
      */
     @JsonProperty("exception")
     public Exception getException() {
@@ -269,7 +278,6 @@ public class Trace {
      * Root Type for Exception
      * <p>
      * Exception occurs during transport.
-     * 
      */
     @JsonProperty("exception")
     public void setException(Exception exception) {
@@ -280,7 +288,6 @@ public class Trace {
      * Root Type for Infrastructure
      * <p>
      * Infrastructure where transport is executed. (Required)
-     * 
      */
     @JsonProperty("infrastructure")
     public Infrastructure getInfrastructure() {
@@ -291,7 +298,6 @@ public class Trace {
      * Root Type for Infrastructure
      * <p>
      * Infrastructure where transport is executed. (Required)
-     * 
      */
     @JsonProperty("infrastructure")
     public void setInfrastructure(Infrastructure infrastructure) {
@@ -300,7 +306,6 @@ public class Trace {
 
     /**
      * Date of document creation.
-     * 
      */
     @JsonProperty("created")
     public Date getCreated() {
@@ -309,7 +314,6 @@ public class Trace {
 
     /**
      * Date of document creation.
-     * 
      */
     @JsonProperty("created")
     public void setCreated(Date created) {

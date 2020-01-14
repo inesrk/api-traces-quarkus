@@ -1,10 +1,10 @@
 package org.enterpriseflowsrepository.api.traces.quarkus.converters;
 
-import org.enterpriseflowsrepository.api.traces.quarkus.beans.Infrastructure;
-import org.enterpriseflowsrepository.api.traces.quarkus.model.*;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.ClientErrorException;
+
+import org.enterpriseflowsrepository.api.traces.quarkus.beans.Infrastructure;
+import org.enterpriseflowsrepository.api.traces.quarkus.model.InfrastructureModel;
 
 @ApplicationScoped
 public class InfrastructureConverter extends AbstractConverter<InfrastructureModel, Infrastructure> {

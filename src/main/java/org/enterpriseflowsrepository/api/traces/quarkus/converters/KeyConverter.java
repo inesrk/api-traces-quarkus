@@ -1,10 +1,10 @@
 package org.enterpriseflowsrepository.api.traces.quarkus.converters;
 
-import org.enterpriseflowsrepository.api.traces.quarkus.beans.Key;
-import org.enterpriseflowsrepository.api.traces.quarkus.model.*;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.ClientErrorException;
+
+import org.enterpriseflowsrepository.api.traces.quarkus.beans.Key;
+import org.enterpriseflowsrepository.api.traces.quarkus.model.KeyModel;
 
 @ApplicationScoped
 public class KeyConverter extends AbstractConverter<KeyModel, Key> {

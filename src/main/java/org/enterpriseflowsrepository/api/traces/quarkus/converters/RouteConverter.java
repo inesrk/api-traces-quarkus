@@ -1,13 +1,17 @@
 package org.enterpriseflowsrepository.api.traces.quarkus.converters;
 
-import org.enterpriseflowsrepository.api.traces.quarkus.beans.Route;
-import org.enterpriseflowsrepository.api.traces.quarkus.model.*;
-
 import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.ws.rs.ClientErrorException;
+
+import org.enterpriseflowsrepository.api.traces.quarkus.beans.Route;
+import org.enterpriseflowsrepository.api.traces.quarkus.model.RouteModel;
 
 @ApplicationScoped
 public class RouteConverter extends AbstractConverter<RouteModel, Route> {
+
+    @Inject
+    SourceConverter sourceConverter;
 
     @Override
     public Route toDto(RouteModel model) throws ClientErrorException {
@@ -19,9 +23,9 @@ public class RouteConverter extends AbstractConverter<RouteModel, Route> {
 
         dto.setDescription(model.getDescription());
         dto.setId(model.getId());
-        dto.setInput(model.getInput());
+        dto.setInput(sourceConverter.toDto(model.getInput()));
         dto.setName(model.getName());
-        dto.setOutput(model.getOutput());
+        dto.setOutput(sourceConverter.toDto(model.getOutput()));
         dto.setStep(model.getStep());
         dto.setVersion(model.getVersion());
 
@@ -47,9 +51,9 @@ public class RouteConverter extends AbstractConverter<RouteModel, Route> {
 
         model.setDescription(dto.getDescription());
         model.setId(dto.getId());
-        model.setInput(dto.getInput());
+        model.setInput(sourceConverter.toModel(dto.getInput()));
         model.setName(dto.getName());
-        model.setOutput(dto.getOutput());
+        model.setOutput(sourceConverter.toModel(dto.getOutput()));
         model.setStep(dto.getStep());
         model.setVersion(dto.getVersion());
 

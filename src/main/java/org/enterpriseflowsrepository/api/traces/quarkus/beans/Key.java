@@ -17,8 +17,27 @@ public class Key {
 
     @JsonProperty("name")
     private String name;
+
     @JsonProperty("value")
     private String value;
+
+    /**
+     * Standard constructor.
+     */
+    public Key() {
+        // nothing here
+    }
+    
+    /**
+     * Internal constructor, to be used in tests.
+     * 
+     * @param name
+     * @param value
+     */
+    Key(String name, String value) {
+        this.name = name;
+        this.value = value;
+    }
 
     @JsonProperty("name")
     public String getName() {

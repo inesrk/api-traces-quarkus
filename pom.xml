@@ -9,9 +9,14 @@
   </parent>
   <groupId>org.enterpriseflowsrepository.api.traces</groupId>
   <artifactId>api-traces-quarkus</artifactId>
-  <version>0.0.0-SNAPSHOT</version>
+  <version>0.1.0-SNAPSHOT</version>
   <properties>
+    <!-- https://search.maven.org/search?q=g:org.elasticsearch.client -->
     <elasticsearch-rest-client.version>7.5.1</elasticsearch-rest-client.version>
+    <!-- https://search.maven.org/search?q=g:io.qala.datagen -->
+    <qala-datagen.version>2.5.1</qala-datagen.version>
+    <!-- https://search.maven.org/search?q=g:org.jboss.jandex -->
+    <jandex-maven-plugin.version>1.0.7</jandex-maven-plugin.version>
   </properties>
   <dependencies>
     <dependency>
@@ -44,11 +49,6 @@
       <artifactId>quarkus-smallrye-fault-tolerance</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-core</artifactId>
-      <version>2.13.0</version>
-    </dependency>
-    <dependency>
       <groupId>org.elasticsearch.client</groupId>
       <artifactId>elasticsearch-rest-client</artifactId>
       <version>${elasticsearch-rest-client.version}</version>
@@ -61,6 +61,20 @@
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-junit5</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <!-- https://search.maven.org/artifact/io.qala.datagen/qala-datagen -->
+    <dependency>
+      <groupId>io.qala.datagen</groupId>
+      <artifactId>qala-datagen</artifactId>
+      <version>${qala-datagen.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <!-- https://search.maven.org/artifact/io.qala.datagen/qala-datagen-junit5 -->
+    <dependency>
+      <groupId>io.qala.datagen</groupId>
+      <artifactId>qala-datagen-junit5</artifactId>
+      <version>${qala-datagen.version}</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -76,10 +90,11 @@
   </repositories>
   <build>
     <plugins>
+      <!-- https://search.maven.org/search?q=g:org.jboss.jandex -->
       <plugin>
         <groupId>org.jboss.jandex</groupId>
         <artifactId>jandex-maven-plugin</artifactId>
-        <version>1.0.7</version>
+        <version>${jandex-maven-plugin.version}</version>
         <executions>
           <execution>
             <id>make-index</id>

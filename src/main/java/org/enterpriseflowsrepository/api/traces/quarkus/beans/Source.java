@@ -17,8 +17,27 @@ public class Source {
 
     @JsonProperty("protocol")
     private String protocol;
+
     @JsonProperty("source")
     private String source;
+
+    /**
+     * Standard constructor.
+     */
+    public Source() {
+        // nothing here
+    }
+    
+    /**
+     * Internal constructor, to be used in tests.
+     * 
+     * @param protocol
+     * @param source
+     */
+    Source(String protocol, String source) {
+        this.protocol = protocol;
+        this.source = source;
+    }
 
     @JsonProperty("protocol")
     public String getProtocol() {

@@ -18,36 +18,56 @@ public class Error {
 
     /**
      * Code of this error: AAAA-0000
-     * 
      */
     @JsonProperty("code")
     @JsonPropertyDescription("Code of this error: AAAA-0000")
     private String code;
+    
     /**
      * Textual description.
-     * 
      */
     @JsonProperty("description")
     @JsonPropertyDescription("Textual description.")
     private String description;
+    
     /**
      * Complete stacktrace or long text to technical details.
-     * 
      */
     @JsonProperty("details")
     @JsonPropertyDescription("Complete stacktrace or long text to technical details.")
     private String details;
+    
     /**
      * EL path of this error.
-     * 
      */
     @JsonProperty("origin")
     @JsonPropertyDescription("EL path of this error.")
     private String origin;
 
     /**
-     * Code of this error: AAAA-0000
+     * Standard constructor.
+     */
+    public Error() {
+        // nothing here
+    }
+    
+    /**
+     * Internal constructor, to be used in tests.
      * 
+     * @param code
+     * @param description
+     * @param details
+     * @param origin
+     */
+    Error(String code, String description, String details, String origin) {
+        this.code = code;
+        this.description = description;
+        this.details = details;
+        this.origin = origin;
+    }
+
+    /**
+     * Code of this error: AAAA-0000
      */
     @JsonProperty("code")
     public String getCode() {
@@ -56,7 +76,6 @@ public class Error {
 
     /**
      * Code of this error: AAAA-0000
-     * 
      */
     @JsonProperty("code")
     public void setCode(String code) {
@@ -65,7 +84,6 @@ public class Error {
 
     /**
      * Textual description.
-     * 
      */
     @JsonProperty("description")
     public String getDescription() {
@@ -74,7 +92,6 @@ public class Error {
 
     /**
      * Textual description.
-     * 
      */
     @JsonProperty("description")
     public void setDescription(String description) {
@@ -83,7 +100,6 @@ public class Error {
 
     /**
      * Complete stacktrace or long text to technical details.
-     * 
      */
     @JsonProperty("details")
     public String getDetails() {
@@ -92,7 +108,6 @@ public class Error {
 
     /**
      * Complete stacktrace or long text to technical details.
-     * 
      */
     @JsonProperty("details")
     public void setDetails(String details) {
@@ -101,7 +116,6 @@ public class Error {
 
     /**
      * EL path of this error.
-     * 
      */
     @JsonProperty("origin")
     public String getOrigin() {
@@ -110,7 +124,6 @@ public class Error {
 
     /**
      * EL path of this error.
-     * 
      */
     @JsonProperty("origin")
     public void setOrigin(String origin) {

@@ -5,14 +5,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 
-import org.enterpriseflowsrepository.api.traces.quarkus.beans.Source;
-
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RouteModel {
 
     /**
      * Name of route.
-     * 
      */
     @JsonProperty("name")
     @JsonPropertyDescription("Name of route.")
@@ -20,7 +17,6 @@ public class RouteModel {
 
     /**
      * Version of route.
-     * 
      */
     @JsonProperty("version")
     @JsonPropertyDescription("Version of route.")
@@ -28,7 +24,6 @@ public class RouteModel {
 
     /**
      * ID of route.
-     * 
      */
     @JsonProperty("id")
     @JsonPropertyDescription("ID of route.")
@@ -36,7 +31,6 @@ public class RouteModel {
 
     /**
      * Step DURIG thie route.
-     * 
      */
     @JsonProperty("step")
     @JsonPropertyDescription("Step DURIG thie route.")
@@ -44,7 +38,6 @@ public class RouteModel {
 
     /**
      * Textual description of route.
-     * 
      */
     @JsonProperty("description")
     @JsonPropertyDescription("Textual description of route.")
@@ -54,25 +47,22 @@ public class RouteModel {
      * Root Type for Source
      * <p>
      * source for Input or Output.
-     * 
      */
     @JsonProperty("input")
     @JsonPropertyDescription("source for Input or Output.")
-    private Source input;
+    private SourceModel input;
 
     /**
      * Root Type for Source
      * <p>
      * source for Input or Output.
-     * 
      */
     @JsonProperty("output")
     @JsonPropertyDescription("source for Input or Output.")
-    private Source output;
+    private SourceModel output;
 
     /**
      * Name of route.
-     * 
      */
     @JsonProperty("name")
     public String getName() {
@@ -81,7 +71,6 @@ public class RouteModel {
 
     /**
      * Name of route.
-     * 
      */
     @JsonProperty("name")
     public void setName(String name) {
@@ -90,7 +79,6 @@ public class RouteModel {
 
     /**
      * Version of route.
-     * 
      */
     @JsonProperty("version")
     public String getVersion() {
@@ -99,7 +87,6 @@ public class RouteModel {
 
     /**
      * Version of route.
-     * 
      */
     @JsonProperty("version")
     public void setVersion(String version) {
@@ -108,7 +95,6 @@ public class RouteModel {
 
     /**
      * ID of route.
-     * 
      */
     @JsonProperty("id")
     public String getId() {
@@ -117,7 +103,6 @@ public class RouteModel {
 
     /**
      * ID of route.
-     * 
      */
     @JsonProperty("id")
     public void setId(String id) {
@@ -126,7 +111,6 @@ public class RouteModel {
 
     /**
      * Step DURIG thie route.
-     * 
      */
     @JsonProperty("step")
     public String getStep() {
@@ -135,7 +119,6 @@ public class RouteModel {
 
     /**
      * Step DURIG thie route.
-     * 
      */
     @JsonProperty("step")
     public void setStep(String step) {
@@ -144,7 +127,6 @@ public class RouteModel {
 
     /**
      * Textual description of route.
-     * 
      */
     @JsonProperty("description")
     public String getDescription() {
@@ -153,7 +135,6 @@ public class RouteModel {
 
     /**
      * Textual description of route.
-     * 
      */
     @JsonProperty("description")
     public void setDescription(String description) {
@@ -162,37 +143,33 @@ public class RouteModel {
 
     /**
      * Source for Input or Output.
-     * 
      */
     @JsonProperty("input")
-    public org.enterpriseflowsrepository.api.traces.quarkus.beans.Source getInput() {
+    public SourceModel getInput() {
         return input;
     }
 
     /**
      * Source for Input or Output.
-     * 
      */
     @JsonProperty("input")
-    public void setInput(org.enterpriseflowsrepository.api.traces.quarkus.beans.Source input) {
+    public void setInput(SourceModel input) {
         this.input = input;
     }
 
     /**
      * Source for Input or Output.
-     * 
      */
     @JsonProperty("output")
-    public org.enterpriseflowsrepository.api.traces.quarkus.beans.Source getOutput() {
+    public SourceModel getOutput() {
         return output;
     }
 
     /**
      * Source for Input or Output.
-     * 
      */
     @JsonProperty("output")
-    public void setOutput(org.enterpriseflowsrepository.api.traces.quarkus.beans.Source output) {
+    public void setOutput(SourceModel output) {
         this.output = output;
     }
 }

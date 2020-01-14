@@ -1,11 +1,11 @@
 package org.enterpriseflowsrepository.api.traces.quarkus.converters;
 
-import org.enterpriseflowsrepository.api.traces.quarkus.beans.Trace;
-import org.enterpriseflowsrepository.api.traces.quarkus.model.*;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.ClientErrorException;
+
+import org.enterpriseflowsrepository.api.traces.quarkus.beans.Trace;
+import org.enterpriseflowsrepository.api.traces.quarkus.model.TraceModel;
 
 @ApplicationScoped
 public class TraceConverter extends AbstractConverter<TraceModel, Trace> {

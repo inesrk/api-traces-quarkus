@@ -2,6 +2,7 @@
 package org.enterpriseflowsrepository.api.traces.quarkus.beans;
 
 import java.util.Date;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
@@ -19,22 +20,45 @@ public class Application {
 
     @JsonProperty("informationSystem")
     private String informationSystem;
+    
     /**
      * Name of application.
-     * 
      */
     @JsonProperty("application")
     @JsonPropertyDescription("Name of application.")
     private String application;
+    
     @JsonProperty("hostname")
     private String hostname;
+    
     /**
      * Creation date of send.
-     * 
      */
     @JsonProperty("created")
     @JsonPropertyDescription("Creation date of send.")
     private Date created;
+
+    /**
+     * Standard constructor.
+     */
+    public Application() {
+        // nothing here
+    }
+    
+    /**
+     * Internal constructor, to be used in tests.
+     * 
+     * @param informationSystem
+     * @param application
+     * @param hostname
+     * @param created
+     */
+    Application(String informationSystem, String application, String hostname, Date created) {
+        this.informationSystem = informationSystem;
+        this.application = application;
+        this.hostname = hostname;
+        this.created = created;
+    }
 
     @JsonProperty("informationSystem")
     public String getInformationSystem() {
@@ -48,7 +72,6 @@ public class Application {
 
     /**
      * Name of application.
-     * 
      */
     @JsonProperty("application")
     public String getApplication() {
@@ -57,7 +80,6 @@ public class Application {
 
     /**
      * Name of application.
-     * 
      */
     @JsonProperty("application")
     public void setApplication(String application) {
@@ -76,7 +98,6 @@ public class Application {
 
     /**
      * Creation date of send.
-     * 
      */
     @JsonProperty("created")
     public Date getCreated() {
@@ -85,7 +106,6 @@ public class Application {
 
     /**
      * Creation date of send.
-     * 
      */
     @JsonProperty("created")
     public void setCreated(Date created) {

@@ -6,20 +6,20 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
 import com.fasterxml.jackson.annotation.JsonValue;
-import com.fasterxml.jackson.annotation.JsonFormat.Shape;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class MessageModel {
 
     /**
      * Date of message creation.
-     * 
      */
     @JsonProperty("created")
     @JsonPropertyDescription("Date of message creation.")
@@ -29,7 +29,6 @@ public class MessageModel {
     /**
      * ID share during some message. ID of a travel between Application Source to
      * Application Target.
-     * 
      */
     @JsonProperty("CorrelationID")
     @JsonPropertyDescription("ID share during some message.\nID of a travel between Application Source to Application Target.")
@@ -37,7 +36,6 @@ public class MessageModel {
 
     /**
      * ID unique of this message. (Required)
-     * 
      */
     @JsonProperty("MessageID")
     @JsonPropertyDescription("ID unique of this message.")
@@ -45,7 +43,6 @@ public class MessageModel {
 
     /**
      * Headers of this message.
-     * 
      */
     @JsonProperty("headers")
     @JsonPropertyDescription("Headers of this message.")
@@ -53,7 +50,6 @@ public class MessageModel {
 
     /**
      * Type of this trace.
-     * 
      */
     @JsonProperty("type")
     @JsonPropertyDescription("Type of this trace.")
@@ -61,7 +57,6 @@ public class MessageModel {
 
     /**
      * Level of this trace. (Required)
-     * 
      */
     @JsonProperty("level")
     @JsonPropertyDescription("Level of this trace.")
@@ -69,7 +64,6 @@ public class MessageModel {
 
     /**
      * Body of message.
-     * 
      */
     @JsonProperty("body")
     @JsonPropertyDescription("Body of message.")
@@ -77,7 +71,6 @@ public class MessageModel {
 
     /**
      * Date of message creation.
-     * 
      */
     @JsonProperty("created")
     public Date getCreated() {
@@ -86,7 +79,6 @@ public class MessageModel {
 
     /**
      * Date of message creation.
-     * 
      */
     @JsonProperty("created")
     public void setCreated(Date created) {
@@ -96,7 +88,6 @@ public class MessageModel {
     /**
      * ID share during some message. ID of a travel between Application Source to
      * Application Target.
-     * 
      */
     @JsonProperty("CorrelationID")
     public String getCorrelationID() {
@@ -106,7 +97,6 @@ public class MessageModel {
     /**
      * ID share during some message. ID of a travel between Application Source to
      * Application Target.
-     * 
      */
     @JsonProperty("CorrelationID")
     public void setCorrelationID(String correlationID) {
@@ -115,7 +105,6 @@ public class MessageModel {
 
     /**
      * ID unique of this message. (Required)
-     * 
      */
     @JsonProperty("MessageID")
     public String getMessageID() {
@@ -124,7 +113,6 @@ public class MessageModel {
 
     /**
      * ID unique of this message. (Required)
-     * 
      */
     @JsonProperty("MessageID")
     public void setMessageID(String messageID) {
@@ -133,7 +121,6 @@ public class MessageModel {
 
     /**
      * Headers of this message.
-     * 
      */
     @JsonProperty("headers")
     public List<KeyModel> getHeaders() {
@@ -142,7 +129,6 @@ public class MessageModel {
 
     /**
      * Headers of this message.
-     * 
      */
     @JsonProperty("headers")
     public void setHeaders(List<KeyModel> headers) {
@@ -151,7 +137,6 @@ public class MessageModel {
 
     /**
      * Type of this trace.
-     * 
      */
     @JsonProperty("type")
     public MessageModel.Type getType() {
@@ -160,7 +145,6 @@ public class MessageModel {
 
     /**
      * Type of this trace.
-     * 
      */
     @JsonProperty("type")
     public void setType(MessageModel.Type type) {
@@ -169,7 +153,6 @@ public class MessageModel {
 
     /**
      * Level of this trace. (Required)
-     * 
      */
     @JsonProperty("level")
     public MessageModel.Level getLevel() {
@@ -178,7 +161,6 @@ public class MessageModel {
 
     /**
      * Level of this trace. (Required)
-     * 
      */
     @JsonProperty("level")
     public void setLevel(MessageModel.Level level) {
@@ -187,7 +169,6 @@ public class MessageModel {
 
     /**
      * Body of message.
-     * 
      */
     @JsonProperty("body")
     public String getBody() {
@@ -196,7 +177,6 @@ public class MessageModel {
 
     /**
      * Body of message.
-     * 
      */
     @JsonProperty("body")
     public void setBody(String body) {

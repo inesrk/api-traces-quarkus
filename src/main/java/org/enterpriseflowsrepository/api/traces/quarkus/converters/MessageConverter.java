@@ -1,11 +1,11 @@
 package org.enterpriseflowsrepository.api.traces.quarkus.converters;
 
-import org.enterpriseflowsrepository.api.traces.quarkus.beans.Message;
-import org.enterpriseflowsrepository.api.traces.quarkus.model.*;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.ClientErrorException;
+
+import org.enterpriseflowsrepository.api.traces.quarkus.beans.Message;
+import org.enterpriseflowsrepository.api.traces.quarkus.model.MessageModel;
 
 @ApplicationScoped
 public class MessageConverter extends AbstractConverter<MessageModel, Message> {

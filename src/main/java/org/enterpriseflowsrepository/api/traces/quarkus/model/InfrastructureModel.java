@@ -10,7 +10,6 @@ public class InfrastructureModel {
 
     /**
      * host of server.
-     * 
      */
     @JsonProperty("hostname")
     @JsonPropertyDescription("host of server.")
@@ -18,7 +17,6 @@ public class InfrastructureModel {
 
     /**
      * host of server.
-     * 
      */
     @JsonProperty("hostname")
     public String getHostname() {
@@ -27,7 +25,6 @@ public class InfrastructureModel {
 
     /**
      * host of server.
-     * 
      */
     @JsonProperty("hostname")
     public void setHostname(String hostname) {

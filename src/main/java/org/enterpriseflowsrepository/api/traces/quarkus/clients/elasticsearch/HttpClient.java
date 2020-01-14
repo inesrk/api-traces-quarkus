@@ -43,19 +43,50 @@ import org.elasticsearch.search.sort.SortBuilder;
 @ApplicationScoped
 public class HttpClient {
 
+    /**
+     * Shared logger of this class.
+     */
     private static final Logger LOG = Logger.getLogger(HttpClient.class.getName());
 
+    /**
+     * Elasticsearch client.
+     * <p>
+     * Work with HTTP REST protocol. Instance is shared threw the entire application.
+     */
     private RestHighLevelClient client;
 
+    /**
+     * Elasticsearch hostname.
+     * <p>
+     * Defined in the property file.
+     */
     @ConfigProperty(name = "traces.db.elasticsearch.host")
     String elasticsearchHost;
 
+    /**
+     * Elasticsearch port.
+     * <p>
+     * Defined in the property file.
+     */
     @ConfigProperty(name = "traces.db.elasticsearch.port")
     Integer elasticsearchPort;
 
+    /**
+     * Elasticsearch protocol.
+     * <p>
+     * Defined in the property file.
+     */
     @ConfigProperty(name = "traces.db.elasticsearch.protocol")
     String elasticsearchProtocol;
 
+    /**
+     * Test if an Elasticsearch index exists.
+     * <p>
+     * Async processing.
+     * 
+     * @param name  Index name
+     * @return      Return true if exists, false if not
+     */
     public CompletableFuture<Boolean> existsIndexAsync(String name) {
         CompletableFuture<Boolean> future = new CompletableFuture<>();
 
@@ -80,6 +111,17 @@ public class HttpClient {
         return future;
     }
 
+    /**
+     * Search document inside an Elasticsearch index.
+     * <p>
+     * Async processing.
+     * 
+     * @param index     Index name in which the request will be processed
+     * @param query     Query definition to be executed
+     * @param sort      Sort definition to be executed
+     * @param source    Bean serializer source
+     * @return          Result list of the fetched document
+     */
     public CompletableFuture<List<? extends AbstractDocument>> searchAsync(String index, QueryBuilder query,
             SortBuilder<?> sort, Class<? extends AbstractDocument> source) {
         CompletableFuture<SearchResponse> future = new CompletableFuture<>();
@@ -136,6 +178,15 @@ public class HttpClient {
         });
     }
 
+    /**
+     * Create documents inside an Elasticsearch index.
+     * <p>
+     * Async processing.
+     * 
+     * @param index Index name in which the request will be processed
+     * @param datas Data collection to insert
+     * @return      Raw Elasticsearch response if there is no errors
+     */
     public CompletableFuture<BulkResponse> createAsync(String index, List<? extends AbstractDocument> datas) {
         CompletableFuture<BulkResponse> future = new CompletableFuture<>();
         ObjectMapper jsonMapper = new ObjectMapper();
@@ -172,6 +223,15 @@ public class HttpClient {
         return future;
     }
 
+    /**
+     * Create documents inside an Elasticsearch index.
+     * <p>
+     * Async processing.
+     * 
+     * @param index Index name in which the request will be processed
+     * @param data  Object to insert
+     * @return      Raw Elasticsearch response if there is no errors
+     */
     public CompletableFuture<IndexResponse> createAsync(String index, AbstractDocument data) {
         CompletableFuture<IndexResponse> future = new CompletableFuture<>();
         ObjectMapper jsonMapper = new ObjectMapper();
@@ -204,6 +264,14 @@ public class HttpClient {
         return future;
     }
 
+     /**
+      * Create an index in the database.
+      * <p>
+      * Async processing.
+      * 
+      * @param name Index name
+      * @return     Raw Elasticsearch response if there is no errors
+      */
     public CompletableFuture<CreateIndexResponse> createIndexAsync(String name) {
         CompletableFuture<CreateIndexResponse> future = new CompletableFuture<>();
         CreateIndexRequest req = new CreateIndexRequest(name);
@@ -224,7 +292,18 @@ public class HttpClient {
 
         return future;
     }
-
+    
+    /**
+     * Get a single document stored inside an Elasticsearch index.
+     * <p>
+     * Async processing.
+     * 
+     * @param index         Index name in which execute the request
+     * @param id            Document UUID
+     * @param source        Bean serializer source
+     * @param forceRefresh  Have we to wait until the Elasticsearch cluster synchronize it's index state with the other shards?
+     * @return              Raw Elasticsearch response if there is no errors
+     */
     public CompletableFuture<? extends AbstractDocument> findAsync(String index, String id,
             Class<? extends AbstractDocument> source, boolean forceRefresh) {
         CompletableFuture<GetResponse> future = new CompletableFuture<>();
@@ -271,6 +350,11 @@ public class HttpClient {
         });
     }
 
+    /**
+     * Return the shared Elasticsearch HTTP REST client.
+     * 
+     * @return  Elasticsearch HTTP REST client
+     */
     private RestHighLevelClient getClient() {
         if (client == null) {
             client = new RestHighLevelClient(RestClient.builder(new HttpHost(elasticsearchHost, elasticsearchPort, elasticsearchProtocol)));

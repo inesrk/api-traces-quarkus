@@ -18,61 +18,87 @@ public class Route {
 
     /**
      * Name of route.
-     * 
      */
     @JsonProperty("name")
     @JsonPropertyDescription("Name of route.")
     private String name;
+
     /**
      * Version of route.
-     * 
      */
     @JsonProperty("version")
     @JsonPropertyDescription("Version of route.")
     private String version;
+
     /**
      * ID of route.
-     * 
      */
     @JsonProperty("id")
     @JsonPropertyDescription("ID of route.")
     private String id;
+    
     /**
      * Step DURIG thie route.
-     * 
      */
     @JsonProperty("step")
     @JsonPropertyDescription("Step DURIG thie route.")
     private String step;
+    
     /**
      * Textual description of route.
-     * 
      */
     @JsonProperty("description")
     @JsonPropertyDescription("Textual description of route.")
     private String description;
+    
     /**
      * Root Type for Source
      * <p>
      * source for Input or Output.
-     * 
      */
     @JsonProperty("input")
     @JsonPropertyDescription("source for Input or Output.")
-    private org.enterpriseflowsrepository.api.traces.quarkus.beans.Source input;
+    private Source input;
+    
     /**
      * Root Type for Source
      * <p>
      * source for Input or Output.
-     * 
      */
     @JsonProperty("output")
     @JsonPropertyDescription("source for Input or Output.")
-    private org.enterpriseflowsrepository.api.traces.quarkus.beans.Source output;
+    private Source output;
+
+    /**
+     * Standard constructor.
+     */
+    public Route() {
+        // nothing here
+    }
+
+    /**
+     * Internal constructor, to be used in tests.
+     * 
+     * @param name
+     * @param version
+     * @param id
+     * @param step
+     * @param description
+     * @param input
+     * @param output
+     */
+    Route(String name, String version, String id, String step, String description, Source input, Source output) {
+        this.name = name;
+        this.version = version;
+        this.id = id;
+        this.step = step;
+        this.description = description;
+        this.input = input;
+        this.output = output;
+    }
 
     /**
      * Name of route.
-     * 
      */
     @JsonProperty("name")
     public String getName() {
@@ -81,7 +107,6 @@ public class Route {
 
     /**
      * Name of route.
-     * 
      */
     @JsonProperty("name")
     public void setName(String name) {
@@ -90,7 +115,6 @@ public class Route {
 
     /**
      * Version of route.
-     * 
      */
     @JsonProperty("version")
     public String getVersion() {
@@ -99,7 +123,6 @@ public class Route {
 
     /**
      * Version of route.
-     * 
      */
     @JsonProperty("version")
     public void setVersion(String version) {
@@ -108,7 +131,6 @@ public class Route {
 
     /**
      * ID of route.
-     * 
      */
     @JsonProperty("id")
     public String getId() {
@@ -117,7 +139,6 @@ public class Route {
 
     /**
      * ID of route.
-     * 
      */
     @JsonProperty("id")
     public void setId(String id) {
@@ -126,7 +147,6 @@ public class Route {
 
     /**
      * Step DURIG thie route.
-     * 
      */
     @JsonProperty("step")
     public String getStep() {
@@ -135,7 +155,6 @@ public class Route {
 
     /**
      * Step DURIG thie route.
-     * 
      */
     @JsonProperty("step")
     public void setStep(String step) {
@@ -144,7 +163,6 @@ public class Route {
 
     /**
      * Textual description of route.
-     * 
      */
     @JsonProperty("description")
     public String getDescription() {
@@ -153,7 +171,6 @@ public class Route {
 
     /**
      * Textual description of route.
-     * 
      */
     @JsonProperty("description")
     public void setDescription(String description) {
@@ -164,10 +181,9 @@ public class Route {
      * Root Type for Source
      * <p>
      * source for Input or Output.
-     * 
      */
     @JsonProperty("input")
-    public org.enterpriseflowsrepository.api.traces.quarkus.beans.Source getInput() {
+    public Source getInput() {
         return input;
     }
 
@@ -175,10 +191,9 @@ public class Route {
      * Root Type for Source
      * <p>
      * source for Input or Output.
-     * 
      */
     @JsonProperty("input")
-    public void setInput(org.enterpriseflowsrepository.api.traces.quarkus.beans.Source input) {
+    public void setInput(Source input) {
         this.input = input;
     }
 
@@ -186,10 +201,9 @@ public class Route {
      * Root Type for Source
      * <p>
      * source for Input or Output.
-     * 
      */
     @JsonProperty("output")
-    public org.enterpriseflowsrepository.api.traces.quarkus.beans.Source getOutput() {
+    public Source getOutput() {
         return output;
     }
 
@@ -197,10 +211,9 @@ public class Route {
      * Root Type for Source
      * <p>
      * source for Input or Output.
-     * 
      */
     @JsonProperty("output")
-    public void setOutput(org.enterpriseflowsrepository.api.traces.quarkus.beans.Source output) {
+    public void setOutput(Source output) {
         this.output = output;
     }
 

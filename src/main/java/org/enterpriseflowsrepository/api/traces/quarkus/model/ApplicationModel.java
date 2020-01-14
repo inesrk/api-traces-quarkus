@@ -2,6 +2,7 @@
 package org.enterpriseflowsrepository.api.traces.quarkus.model;
 
 import java.util.Date;
+
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyDescription;
@@ -14,7 +15,6 @@ public class ApplicationModel {
 
     /**
      * Name of application.
-     * 
      */
     @JsonProperty("application")
     @JsonPropertyDescription("Name of application.")
@@ -25,7 +25,6 @@ public class ApplicationModel {
 
     /**
      * Creation date of send.
-     * 
      */
     @JsonProperty("created")
     @JsonPropertyDescription("Creation date of send.")
@@ -43,7 +42,6 @@ public class ApplicationModel {
 
     /**
      * Name of application.
-     * 
      */
     @JsonProperty("application")
     public String getApplication() {
@@ -52,7 +50,6 @@ public class ApplicationModel {
 
     /**
      * Name of application.
-     * 
      */
     @JsonProperty("application")
     public void setApplication(String application) {
@@ -71,7 +68,6 @@ public class ApplicationModel {
 
     /**
      * Creation date of send.
-     * 
      */
     @JsonProperty("created")
     public Date getCreated() {
@@ -80,7 +76,6 @@ public class ApplicationModel {
 
     /**
      * Creation date of send.
-     * 
      */
     @JsonProperty("created")
     public void setCreated(Date created) {

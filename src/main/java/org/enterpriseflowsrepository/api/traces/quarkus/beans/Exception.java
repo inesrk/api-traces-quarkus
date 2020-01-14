@@ -18,36 +18,56 @@ public class Exception {
 
     /**
      * Unique code for this exception.
-     * 
      */
     @JsonProperty("code")
     @JsonPropertyDescription("Unique code for this exception.")
     private String code;
+
     /**
      * Class name.
-     * 
      */
     @JsonProperty("class")
     @JsonPropertyDescription("Class name.")
     private String _class;
+    
     /**
      * A short text details.
-     * 
      */
     @JsonProperty("detail")
     @JsonPropertyDescription("A short text details.")
     private String detail;
+    
     /**
      * complete stacktrace of this exception.
-     * 
      */
     @JsonProperty("stacktrace")
     @JsonPropertyDescription("complete stacktrace of this exception.")
     private String stacktrace;
 
     /**
-     * Unique code for this exception.
+     * Standard constructor.
+     */
+    public Exception() {
+        // nothing here
+    }
+    
+    /**
+     * Internal constructor, to be used in tests.
      * 
+     * @param code
+     * @param _class
+     * @param detail
+     * @param stacktrace
+     */
+    Exception(String code, String _class, String detail, String stacktrace) {
+        this.code = code;
+        this._class = _class;
+        this.detail = detail;
+        this.stacktrace = stacktrace;
+    }
+
+    /**
+     * Unique code for this exception.
      */
     @JsonProperty("code")
     public String getCode() {
@@ -56,7 +76,6 @@ public class Exception {
 
     /**
      * Unique code for this exception.
-     * 
      */
     @JsonProperty("code")
     public void setCode(String code) {
@@ -65,7 +84,6 @@ public class Exception {
 
     /**
      * Class name.
-     * 
      */
     @JsonProperty("class")
     public String getClass_() {
@@ -74,7 +92,6 @@ public class Exception {
 
     /**
      * Class name.
-     * 
      */
     @JsonProperty("class")
     public void setClass_(String _class) {
@@ -83,7 +100,6 @@ public class Exception {
 
     /**
      * A short text details.
-     * 
      */
     @JsonProperty("detail")
     public String getDetail() {
@@ -92,7 +108,6 @@ public class Exception {
 
     /**
      * A short text details.
-     * 
      */
     @JsonProperty("detail")
     public void setDetail(String detail) {
@@ -101,7 +116,6 @@ public class Exception {
 
     /**
      * complete stacktrace of this exception.
-     * 
      */
     @JsonProperty("stacktrace")
     public String getStacktrace() {
@@ -110,7 +124,6 @@ public class Exception {
 
     /**
      * complete stacktrace of this exception.
-     * 
      */
     @JsonProperty("stacktrace")
     public void setStacktrace(String stacktrace) {

@@ -17,16 +17,30 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class Infrastructure {
 
     /**
-     * host of server.
-     * 
+     * Host of server.
      */
     @JsonProperty("hostname")
     @JsonPropertyDescription("host of server.")
     private String hostname;
 
     /**
-     * host of server.
+     * Standard constructor.
+     */
+    public Infrastructure() {
+        // nothing here
+    }
+    
+    /**
+     * Internal constructor, to be used in tests.
      * 
+     * @param hostname
+     */
+    Infrastructure(String hostname) {
+        this.hostname = hostname;
+    }
+
+    /**
+     * Host of server.
      */
     @JsonProperty("hostname")
     public String getHostname() {
@@ -34,12 +48,10 @@ public class Infrastructure {
     }
 
     /**
-     * host of server.
-     * 
+     * Host of server.
      */
     @JsonProperty("hostname")
     public void setHostname(String hostname) {
         this.hostname = hostname;
     }
-
 }

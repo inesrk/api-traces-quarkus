@@ -1,10 +1,10 @@
 package org.enterpriseflowsrepository.api.traces.quarkus.converters;
 
-import org.enterpriseflowsrepository.api.traces.quarkus.beans.Application;
-import org.enterpriseflowsrepository.api.traces.quarkus.model.*;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.ws.rs.ClientErrorException;
+
+import org.enterpriseflowsrepository.api.traces.quarkus.beans.Application;
+import org.enterpriseflowsrepository.api.traces.quarkus.model.ApplicationModel;
 
 @ApplicationScoped
 public class ApplicationConverter extends AbstractConverter<ApplicationModel, Application> {
