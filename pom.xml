@@ -11,12 +11,14 @@
   <artifactId>api-traces-quarkus</artifactId>
   <version>0.1.0-SNAPSHOT</version>
   <properties>
-    <!-- https://search.maven.org/search?q=g:org.elasticsearch.client -->
+    <!-- https://search.maven.org/artifact/org.elasticsearch.client/elasticsearch-rest-client -->
     <elasticsearch-rest-client.version>7.5.1</elasticsearch-rest-client.version>
     <!-- https://search.maven.org/search?q=g:io.qala.datagen -->
     <qala-datagen.version>2.5.1</qala-datagen.version>
-    <!-- https://search.maven.org/search?q=g:org.jboss.jandex -->
+    <!-- https://search.maven.org/artifact/org.jboss.jandex/jandex-maven-plugin -->
     <jandex-maven-plugin.version>1.0.7</jandex-maven-plugin.version>
+    <!-- https://search.maven.org/artifact/org.apache.maven.plugins/maven-checkstyle-plugin -->
+    <maven-checkstyle-plugin.version>3.1.0</maven-checkstyle-plugin.version>
   </properties>
   <dependencies>
     <dependency>
@@ -90,7 +92,16 @@
   </repositories>
   <build>
     <plugins>
-      <!-- https://search.maven.org/search?q=g:org.jboss.jandex -->
+      <!-- https://search.maven.org/artifact/org.apache.maven.plugins/maven-checkstyle-plugin -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>${maven-checkstyle-plugin.version}</version>
+        <configuration>
+          <configLocation>checkstyle.xml</configLocation>
+        </configuration>
+      </plugin>
+      <!-- https://search.maven.org/artifact/org.jboss.jandex/jandex-maven-plugin -->
       <plugin>
         <groupId>org.jboss.jandex</groupId>
         <artifactId>jandex-maven-plugin</artifactId>

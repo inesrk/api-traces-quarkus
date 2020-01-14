@@ -15,7 +15,7 @@ USER root
 COPY . .
 
 # Build app from sources
-RUN ./mvnw clean package -Pnative
+RUN ./mvnw package -Pnative -DskipTests=true -B -V
 
 ######
 ## STAGE 2: create the docker final image

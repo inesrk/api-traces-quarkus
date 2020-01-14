@@ -49,17 +49,18 @@ before_install:
 # Define maven custom repo (requirement for 'api-module-quarkus')
 - cp .travis.settings.xml $HOME/.m2/settings.xml
 
+# Install is automatically done by Travis
 script:
-# Install the maven dependencies
-- ./mvnw clean install
 # Build the container (binaries are built into a multistage container)
-- docker build --file src/main/docker/Dockerfile -t "$CONTAINER_NAME" .
+- docker build --file ./src/main/docker/Dockerfile -t "$CONTAINER_NAME" .
 
 after_success:
+# Code quality
+- ./mvnw checkstyle:checkstyle
 # Test the pre-build
 - ./src/tests/scripts/functional-maven.sh
 # Run SonarQube
-# - ./mvnw clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=EnterpriseFlowsRepository_api-traces-quarkus
+# - ./mvnw org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=EnterpriseFlowsRepository_api-traces-quarkus
 # Test the container by attacking the app
 - ./src/tests/scripts/security-owasp-zap.sh
 

@@ -17,7 +17,7 @@ docker run -d -p 9200:9200 -e "discovery.type=single-node" elastic/elasticsearch
 echo -e "\n\033[1m🍽 Testing the app...\033[0m"
 
 # Test the app
-./mvnw clean verify
+./mvnw verify
 
 echo -e "\n\033[1m🌪 Cleaning up...\033[0m"
 

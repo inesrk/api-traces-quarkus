@@ -47,7 +47,7 @@ In order to start with the project, first install a JDK then install the project
 Unit tests are integrated within the project. [We are use JUnit 5](https://junit.org/junit5). Start them with:
 
 ```bash
-./mvnw clean verify
+./mvnw verify
 ```
 
 ## Deployment
