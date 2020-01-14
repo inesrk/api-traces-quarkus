@@ -3,7 +3,7 @@
 ######
 
 # Use a base image with a Redhat customized Centos based image with GraalVM
-FROM quay.io/quarkus/centos-quarkus-maven:19.2.1 AS build
+FROM quay.io/quarkus/centos-quarkus-maven:19.3.0.2-java8 AS build
 
 # Use a standard work directory
 WORKDIR /usr/src/app
