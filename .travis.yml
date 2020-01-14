@@ -58,11 +58,11 @@ after_success:
 # Code quality
 - ./mvnw checkstyle:checkstyle
 # Test the pre-build
-- ./src/tests/scripts/functional-maven.sh
+- ./src/test/scripts/functional-maven.sh
 # Run SonarQube
 # - ./mvnw org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.projectKey=EnterpriseFlowsRepository_api-traces-quarkus
 # Test the container by attacking the app
-- ./src/tests/scripts/security-owasp-zap.sh
+- ./src/test/scripts/security-owasp-zap.sh
 
 notifications:
   # Notify each build on Slack
@@ -71,11 +71,11 @@ notifications:
 deploy:
 # Push builds with default tags to 'docker.io'
 - provider: script
-  script: bash ./src/tests/scripts/container-push.sh -r docker.io -u "$CONTAINER_REPO_HUB_DOCKER_COM_USERNAME" -p "$CONTAINER_REPO_HUB_DOCKER_COM_PASSWORD" -i "$CONTAINER_NAME" -v "$CONTAINER_TAG_SHORT" -w "$CONTAINER_TAG_FULL" -a default
+  script: bash ./src/main/docker/container-push.sh -r docker.io -u "$CONTAINER_REPO_HUB_DOCKER_COM_USERNAME" -p "$CONTAINER_REPO_HUB_DOCKER_COM_PASSWORD" -i "$CONTAINER_NAME" -v "$CONTAINER_TAG_SHORT" -w "$CONTAINER_TAG_FULL" -a default
   on:
     all_branches: true
 # Push builds with stable tags to 'docker.io'
 - provider: script
-  script: bash ./src/tests/scripts/container-push.sh -r docker.io -u "$CONTAINER_REPO_HUB_DOCKER_COM_USERNAME" -p "$CONTAINER_REPO_HUB_DOCKER_COM_PASSWORD" -i "$CONTAINER_NAME" -v "$CONTAINER_TAG_SHORT" -w "$CONTAINER_TAG_FULL" -a stable
+  script: bash ./src/main/docker/container-push.sh -r docker.io -u "$CONTAINER_REPO_HUB_DOCKER_COM_USERNAME" -p "$CONTAINER_REPO_HUB_DOCKER_COM_PASSWORD" -i "$CONTAINER_NAME" -v "$CONTAINER_TAG_SHORT" -w "$CONTAINER_TAG_FULL" -a stable
   on:
     branch: master

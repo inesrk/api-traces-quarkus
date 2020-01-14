@@ -8,9 +8,6 @@ set -e
 
 echo -e "\n\033[1m⏳ Starting the database 'elastic/elasticsearch:$ELK_VERSION'...\033[0m"
 
-# Fetch the last version of the database
-docker pull elastic/elasticsearch:$ELK_VERSION
-
 # Start the database in background
 docker run -d -p 9200:9200 -e "discovery.type=single-node" elastic/elasticsearch:$ELK_VERSION
 
