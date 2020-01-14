@@ -87,7 +87,7 @@ public class TraceRepository {
     }
 
     /**
-     * Insert a list of Trace objects.
+     * Insert a list of Trace objects in the default Elasticsearch index.
      * 
      * @param datas Trace collection
      */
@@ -106,7 +106,7 @@ public class TraceRepository {
     }
 
     /**
-     * Search for Trace objects.
+     * Search for Trace objects stored the default Elasticsearch index.
      * 
      * @param after     Returned objects will have be created after or at this exact date
      * @param before    Returned objects will have be created before or at this exact date
@@ -145,7 +145,7 @@ public class TraceRepository {
     }
 
     /**
-     * Insert a specific Trace object.
+     * Insert a specific Trace object in the default Elasticsearch index.
      * 
      * @param data  Trace object
      */
