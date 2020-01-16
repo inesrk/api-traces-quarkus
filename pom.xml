@@ -17,8 +17,6 @@
   <properties>
     <!-- https://search.maven.org/artifact/org.elasticsearch.client/elasticsearch-rest-client -->
     <elasticsearch-rest-client.version>7.5.1</elasticsearch-rest-client.version>
-    <!-- https://search.maven.org/search?q=g:io.qala.datagen -->
-    <qala-datagen.version>2.5.1</qala-datagen.version>
   </properties>
   
   <dependencies>
@@ -34,33 +32,33 @@
       <artifactId>elasticsearch-rest-high-level-client</artifactId>
       <version>${elasticsearch-rest-client.version}</version>
     </dependency>
-    <!-- https://search.maven.org/artifact/io.qala.datagen/qala-datagen -->
-    <dependency>
-      <groupId>io.qala.datagen</groupId>
-      <artifactId>qala-datagen</artifactId>
-      <version>${qala-datagen.version}</version>
-      <scope>test</scope>
-    </dependency>
-    <!-- https://search.maven.org/artifact/io.qala.datagen/qala-datagen-junit5 -->
-    <dependency>
-      <groupId>io.qala.datagen</groupId>
-      <artifactId>qala-datagen-junit5</artifactId>
-      <version>${qala-datagen.version}</version>
-      <scope>test</scope>
-    </dependency>
   </dependencies>
 
-  
   <build>
     <plugins>
-      <!-- https://search.maven.org/artifact/org.codehaus.mojo/flatten-maven-plugin -->
+      <!-- https://search.maven.org/artifact/io.quarkus/quarkus-maven-plugin -->
       <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>flatten-maven-plugin</artifactId>
-        <configuration>
-          <updatePomFile>true</updatePomFile>
-          <flattenMode>oss</flattenMode>
-        </configuration>
+        <groupId>io.quarkus</groupId>
+        <artifactId>quarkus-maven-plugin</artifactId>
+      </plugin>
+      <!-- https://search.maven.org/artifact/org.jacoco/jacoco-maven-plugin -->
+      <plugin>
+        <groupId>org.jacoco</groupId>
+        <artifactId>jacoco-maven-plugin</artifactId>
+      </plugin>
+      <!-- https://search.maven.org/artifact/org.apache.maven.plugins/maven-surefire-plugin -->
+      <plugin>
+        <artifactId>maven-surefire-plugin</artifactId>
+      </plugin>
+      <!-- https://search.maven.org/artifact/org.jboss.jandex/jandex-maven-plugin -->
+      <plugin>
+        <groupId>org.jboss.jandex</groupId>
+        <artifactId>jandex-maven-plugin</artifactId>
+      </plugin>
+      <!-- https://search.maven.org/artifact/org.apache.maven.plugins/maven-checkstyle-plugin -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
       </plugin>
     </plugins>
   </build>

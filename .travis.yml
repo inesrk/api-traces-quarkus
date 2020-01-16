@@ -55,8 +55,6 @@ script:
 - docker build --file ./src/main/docker/Dockerfile -t "$CONTAINER_NAME" .
 
 after_success:
-# Code quality
-- ./mvnw checkstyle:checkstyle
 # Test the pre-build
 - ./src/test/scripts/functional-maven.sh
 # Run SonarQube
