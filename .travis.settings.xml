@@ -6,32 +6,114 @@
 
   <servers>
     <server>
-      <id>github-enterpriseflowsrepository</id>
-      <username>${env.GITHUB_LOGIN}</username>
-      <password>${env.GITHUB_PASSWORD}</password>
+      <id>oss-sonatype-snapshot</id>
+      <username>${env.SONATYPE_LOGIN}</username>
+      <password>${env.SONATYPE_PASSWORD}</password>
+    </server>
+
+    <server>
+      <id>oss-sonatype-release</id>
+      <username>${env.SONATYPE_LOGIN}</username>
+      <password>${env.SONATYPE_PASSWORD}</password>
     </server>
   </servers>
 
   <profiles>
     <profile>
-      <id>github</id>
+      <id>redhat-ga-repository</id>
       <repositories>
         <repository>
-          <id>central</id>
-          <url>https://repo1.maven.org/maven2</url>
-          <releases><enabled>true</enabled></releases>
-          <snapshots><enabled>false</enabled></snapshots>
+          <id>redhat-ga-repository</id>
+          <name>Red Hat GA repository</name>
+          <url>http://maven.repository.redhat.com/ga/</url>
+          <releases>
+            <enabled>true</enabled>
+            <updatePolicy>never</updatePolicy>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
+            <updatePolicy>daily</updatePolicy>
+          </snapshots>
         </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>redhat-ga-repository</id>
+          <name>Red Hat GA repository</name>
+          <url>http://maven.repository.redhat.com/ga/</url>
+          <releases>
+            <enabled>true</enabled>
+            <updatePolicy>never</updatePolicy>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
+            <updatePolicy>daily</updatePolicy>
+          </snapshots>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+
+    <profile>
+      <id>repository-apache-org</id>
+      <repositories>
         <repository>
-          <id>github-enterpriseflowsrepository</id>
-          <name>GitHub EnterpriseFlowsRepository Apache Maven Packages</name>
-          <url>https://maven.pkg.github.com/EnterpriseFlowsRepository</url>
+          <id>repository-apache-org</id>
+          <name>Apache Repository</name>
+          <url>https://repository.apache.org/content/groups/public/</url>
+          <releases>
+            <enabled>true</enabled>
+            <updatePolicy>never</updatePolicy>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
+            <updatePolicy>daily</updatePolicy>
+          </snapshots>
+        </repository>
+      </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <id>repository-apache-org</id>
+          <name>Apache Repository</name>
+          <url>https://repository.apache.org/content/groups/public/</url>
+          <releases>
+            <enabled>true</enabled>
+            <updatePolicy>never</updatePolicy>
+          </releases>
+          <snapshots>
+            <enabled>false</enabled>
+            <updatePolicy>daily</updatePolicy>
+          </snapshots>
+        </pluginRepository>
+      </pluginRepositories>
+    </profile>
+
+    <profile>
+      <id>sonatype</id>
+      <repositories>
+        <repository>
+          <snapshots>
+            <enabled>true</enabled>
+          </snapshots>
+          <id>oss-sonatype-snapshot</id>
+          <name>oss-sonatype-snapshot</name>
+          <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
+
+        <repository>
+          <snapshots>
+            <enabled>false</enabled>
+          </snapshots>
+          <id>oss-sonatype-release</id>
+          <name>oss-sonatype-release</name>
+          <url>https://oss.sonatype.org/service/local/staging/deploy/maven2</url>
         </repository>
       </repositories>
     </profile>
   </profiles>
 
   <activeProfiles>
-    <activeProfile>github</activeProfile>
+    <activeProfile>redhat-ga-repository</activeProfile>
+    <activeProfile>repository-apache-org</activeProfile>
+    <activeProfile>sonatype</activeProfile>
   </activeProfiles>
 </settings>
