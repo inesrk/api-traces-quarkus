@@ -12,6 +12,7 @@
   <groupId>org.enterpriseflowsrepository.api</groupId>
   <artifactId>api-traces-quarkus</artifactId>
   <version>0.1.0-SNAPSHOT</version>
+  <name>Traces API with Quarkus</name>
   
   <properties>
     <!-- https://search.maven.org/artifact/org.elasticsearch.client/elasticsearch-rest-client -->
@@ -49,6 +50,7 @@
     </dependency>
   </dependencies>
 
+  
   <build>
     <plugins>
       <!-- https://search.maven.org/artifact/org.codehaus.mojo/flatten-maven-plugin -->
