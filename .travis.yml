@@ -73,7 +73,9 @@ deploy:
 - provider: script
   script: bash ./src/main/docker/container-push.sh -r docker.io -u "$CONTAINER_REPO_HUB_DOCKER_COM_USERNAME" -p "$CONTAINER_REPO_HUB_DOCKER_COM_PASSWORD" -i "$CONTAINER_NAME" -v "$CONTAINER_TAG_SHORT" -w "$CONTAINER_TAG_FULL" -a default
   on:
-    all_branches: true
+    branchs:
+    - dev
+    - master
 # Push builds with stable tags to 'docker.io'
 - provider: script
   script: bash ./src/main/docker/container-push.sh -r docker.io -u "$CONTAINER_REPO_HUB_DOCKER_COM_USERNAME" -p "$CONTAINER_REPO_HUB_DOCKER_COM_PASSWORD" -i "$CONTAINER_NAME" -v "$CONTAINER_TAG_SHORT" -w "$CONTAINER_TAG_FULL" -a stable
