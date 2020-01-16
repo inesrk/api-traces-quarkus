@@ -7,56 +7,52 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
  * Root Type for Source
- * <p>
- * source for Input or Output.
+ * 
+ * <p>Source for Input or Output.
  * 
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "protocol", "source" })
 public class Source {
 
-    @JsonProperty("protocol")
-    private String protocol;
+  @JsonProperty("protocol")
+  private String protocol;
 
-    @JsonProperty("source")
-    private String source;
+  @JsonProperty("source")
+  private String source;
 
-    /**
-     * Standard constructor.
-     */
-    public Source() {
-        // nothing here
-    }
-    
-    /**
-     * Internal constructor, to be used in tests.
-     * 
-     * @param protocol
-     * @param source
-     */
-    Source(String protocol, String source) {
-        this.protocol = protocol;
-        this.source = source;
-    }
+  /**
+   * Default constructor.
+   */
+  public Source() {
+    // nothing here
+  }
+  
+  /**
+   * Internal constructor, to be used in tests.
+   */
+  Source(String protocol, String source) {
+    this.protocol = protocol;
+    this.source = source;
+  }
 
-    @JsonProperty("protocol")
-    public String getProtocol() {
-        return protocol;
-    }
+  @JsonProperty("protocol")
+  public String getProtocol() {
+    return protocol;
+  }
 
-    @JsonProperty("protocol")
-    public void setProtocol(String protocol) {
-        this.protocol = protocol;
-    }
+  @JsonProperty("protocol")
+  public void setProtocol(String protocol) {
+    this.protocol = protocol;
+  }
 
-    @JsonProperty("source")
-    public String getSource() {
-        return source;
-    }
+  @JsonProperty("source")
+  public String getSource() {
+    return source;
+  }
 
-    @JsonProperty("source")
-    public void setSource(String source) {
-        this.source = source;
-    }
-
+  @JsonProperty("source")
+  public void setSource(String source) {
+    this.source = source;
+  }
 }

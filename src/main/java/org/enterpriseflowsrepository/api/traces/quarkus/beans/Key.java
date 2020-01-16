@@ -7,56 +7,52 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 /**
  * Root Type for Key
- * <p>
- * Key with value. Abstract notion for headers, etc.
+ * 
+ * <p>Key with value. Abstract notion for headers, etc.
  * 
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({ "name", "value" })
 public class Key {
 
-    @JsonProperty("name")
-    private String name;
+  @JsonProperty("name")
+  private String name;
 
-    @JsonProperty("value")
-    private String value;
+  @JsonProperty("value")
+  private String value;
 
-    /**
-     * Standard constructor.
-     */
-    public Key() {
-        // nothing here
-    }
-    
-    /**
-     * Internal constructor, to be used in tests.
-     * 
-     * @param name
-     * @param value
-     */
-    Key(String name, String value) {
-        this.name = name;
-        this.value = value;
-    }
+  /**
+   * Default constructor.
+   */
+  public Key() {
+    // nothing here
+  }
+  
+  /**
+   * Internal constructor, to be used in tests.
+   */
+  Key(String name, String value) {
+    this.name = name;
+    this.value = value;
+  }
 
-    @JsonProperty("name")
-    public String getName() {
-        return name;
-    }
+  @JsonProperty("name")
+  public String getName() {
+    return name;
+  }
 
-    @JsonProperty("name")
-    public void setName(String name) {
-        this.name = name;
-    }
+  @JsonProperty("name")
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    @JsonProperty("value")
-    public String getValue() {
-        return value;
-    }
+  @JsonProperty("value")
+  public String getValue() {
+    return value;
+  }
 
-    @JsonProperty("value")
-    public void setValue(String value) {
-        this.value = value;
-    }
-
+  @JsonProperty("value")
+  public void setValue(String value) {
+    this.value = value;
+  }
 }
